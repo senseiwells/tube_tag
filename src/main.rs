@@ -1,7 +1,6 @@
 use iced::{executor};
 use iced::widget::{column, container, row, image, text_input};
 use iced::{Application, Command, Element, Length, Settings, Theme};
-use iced::widget::image::viewer;
 
 pub fn main() -> iced::Result {
     let mut settings = Settings::default();
