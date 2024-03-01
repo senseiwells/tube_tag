@@ -1,9 +1,6 @@
-use std::fmt::format;
-use std::io::Read;
 use iced::{executor, theme};
-use iced::widget::{button, column, container, row, text, svg, image};
+use iced::widget::{button, column, container, row, text, svg, image, text_input};
 use iced::{Application, Command, Element, Length, Settings, Theme};
-use iced::widget::image::viewer;
 
 pub fn main() -> iced::Result {
     TubeTagApp::run(Settings::default())
@@ -11,12 +8,13 @@ pub fn main() -> iced::Result {
 
 #[derive(Default)]
 struct TubeTagApp {
-    clicks : u32
+    current_guess: String
 }
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone)]
 enum Message {
-    BtnClicked
+    GuessInputChanged(String),
+    GuessSubmitted
 }
 
 impl Application for TubeTagApp {
@@ -35,42 +33,47 @@ impl Application for TubeTagApp {
 
     fn update(&mut self, message: Message) -> Command<Message> {
         match message {
-            Message::BtnClicked => {
-                self.clicks += 1;
+            Message::GuessInputChanged(input) => {
+                self.current_guess = input
+            }
+            Message::GuessSubmitted => {
+                // TODO: Check that it's a valid tube station
+                //  If it is and the user has not guessed it we
+                //  reset the current guess, otherwise nothing
+                self.current_guess = "".to_string()
             }
         }
-
         Command::none()
     }
 
     fn view(&self) -> Element<Message> {
         let map_path = format!(
-            "{}/assets/standard-tube-map-tube-only.png",
+            "{}/assets/tube-map-4k.png",
             env!("CARGO_MANIFEST_DIR")
         );
 
         let map_handle = image::Handle::from_path(map_path);
+        let map_viewer = image::viewer(map_handle)
+            .width(Length::Fill);
 
-        let map_viewer = viewer(map_handle);
+        let guess_input = text_input("Tube Station", &self.current_guess)
+            .on_input(Message::GuessInputChanged)
+            .on_submit(Message::GuessSubmitted);
 
-        // Construct svg object from handle
-        // let tube_img = svg(tube_img_handle).width(Length::Fill).height(Length::Fill).style(
-        //     theme::Svg::Default
-        // );
+        let input_row = row![
+            guess_input
+        ].padding(5);
 
         let column_layout = column![
+            input_row,
             map_viewer
         ];
 
-
-
         container(
-            column_layout
-            .height(Length::Fill),
+            column_layout,
         )
             .width(Length::Fill)
             .height(Length::Fill)
-            .padding(20)
             .center_x()
             .center_y()
             .into()
