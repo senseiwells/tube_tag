@@ -1,17 +1,20 @@
-use iced::{executor, theme};
-use iced::widget::{button, column, container, row, text, svg, image, text_input};
+use iced::{executor};
+use iced::widget::{column, container, row, image, text_input};
 use iced::{Application, Command, Element, Length, Settings, Theme};
+use iced::widget::image::viewer;
 
 pub fn main() -> iced::Result {
-    TubeTagApp::run(Settings::default())
+    let mut settings = Settings::default();
+    settings.antialiasing = true;
+    TubeTagApp::run(settings)
 }
 
 #[derive(Default)]
 struct TubeTagApp {
-    current_guess: String
+    station_input : String
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Copy)]
 enum Message {
     GuessInputChanged(String),
     GuessSubmitted
@@ -34,32 +37,34 @@ impl Application for TubeTagApp {
     fn update(&mut self, message: Message) -> Command<Message> {
         match message {
             Message::GuessInputChanged(input) => {
-                self.current_guess = input
+                self.station_input = input
             }
             Message::GuessSubmitted => {
                 // TODO: Check that it's a valid tube station
                 //  If it is and the user has not guessed it we
                 //  reset the current guess, otherwise nothing
-                self.current_guess = "".to_string()
+                self.station_input = "".to_string()
             }
         }
         Command::none()
     }
 
     fn view(&self) -> Element<Message> {
+        // Construct map viewer
         let map_path = format!(
             "{}/assets/tube-map-4k.png",
             env!("CARGO_MANIFEST_DIR")
         );
-
         let map_handle = image::Handle::from_path(map_path);
         let map_viewer = image::viewer(map_handle)
             .width(Length::Fill);
 
-        let guess_input = text_input("Tube Station", &self.current_guess)
+        // Construct input field
+        let guess_input = text_input("Guess a station", &self.station_input)
             .on_input(Message::GuessInputChanged)
             .on_submit(Message::GuessSubmitted);
 
+        // === Layout ===
         let input_row = row![
             guess_input
         ].padding(5);
