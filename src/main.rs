@@ -13,7 +13,7 @@ struct TubeTagApp {
     station_input : String
 }
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone)]
 enum Message {
     GuessInputChanged(String),
     GuessSubmitted
