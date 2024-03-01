@@ -1,22 +1,22 @@
-use std::fmt::format;
-use std::io::Read;
-use iced::{executor, theme};
-use iced::widget::{button, column, container, row, text, svg, image};
+use iced::{executor};
+use iced::widget::{column, container, image, text_input};
 use iced::{Application, Command, Element, Length, Settings, Theme};
 use iced::widget::image::viewer;
 
 pub fn main() -> iced::Result {
-    TubeTagApp::run(Settings::default())
+    let mut settings = Settings::default();
+    settings.antialiasing = true;
+    TubeTagApp::run(settings)
 }
 
 #[derive(Default)]
 struct TubeTagApp {
-    clicks : u32
+    station_input : String
 }
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone)]
 enum Message {
-    BtnClicked
+    InputChanged(String)
 }
 
 impl Application for TubeTagApp {
@@ -35,8 +35,8 @@ impl Application for TubeTagApp {
 
     fn update(&mut self, message: Message) -> Command<Message> {
         match message {
-            Message::BtnClicked => {
-                self.clicks += 1;
+            Message::InputChanged(input) => {
+                self.station_input = input;
             }
         }
 
@@ -44,29 +44,26 @@ impl Application for TubeTagApp {
     }
 
     fn view(&self) -> Element<Message> {
-        let map_path = format!(
-            "{}/assets/standard-tube-map-tube-only.png",
-            env!("CARGO_MANIFEST_DIR")
-        );
-
+        // Construct map viewer
+        let map_path = format!("{}/assets/standard-tube-map-tube-only.png",
+                               env!("CARGO_MANIFEST_DIR"));
         let map_handle = image::Handle::from_path(map_path);
+        let map_viewer = viewer(map_handle)
+            .width(Length::Fill);
 
-        let map_viewer = viewer(map_handle);
+        // Construct input field
+        let input_field = text_input("Guess a station", &self.station_input)
+            .on_input(Message::InputChanged)
+            .width(Length::Fill);
 
-        // Construct svg object from handle
-        // let tube_img = svg(tube_img_handle).width(Length::Fill).height(Length::Fill).style(
-        //     theme::Svg::Default
-        // );
-
+        // === Layout ===
         let column_layout = column![
+            input_field,
             map_viewer
         ];
 
-
-
         container(
             column_layout
-            .height(Length::Fill),
         )
             .width(Length::Fill)
             .height(Length::Fill)
