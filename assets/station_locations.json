@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Epping",
+    "station_offsets": [
+      [6584, 172]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  }
+]

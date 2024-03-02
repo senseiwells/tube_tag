@@ -1,14 +1,19 @@
 mod render_overlay;
+mod stations;
 
+use std::fs;
+use std::fs::File;
 use std::ops::{Add, Mul, Sub};
-use iced::{Color, executor, Point, Rectangle, Renderer, Size, Vector};
-use iced::widget::{column, container, row, image, text_input, text, Text, Column, canvas};
+use iced::{Color, executor, Font, font, Pixels, Point, Rectangle, Renderer, Vector};
+use iced::widget::{column, container, row, image, text_input, text, Column, canvas};
 use iced::{Application, Command, Element, Length, Settings, Theme};
+use iced::alignment::{Horizontal, Vertical};
 use iced::mouse::Cursor;
-use iced::widget::canvas::{Cache, Geometry, Path, Program};
-use iced::widget::canvas::path::lyon_path::geom::euclid::vec2;
+use iced::widget::canvas::{Cache, Geometry, Path, Program, Text};
 use iced::widget::image::viewer;
+use iced::widget::text::Shaping;
 use crate::render_overlay::RenderOverlay;
+use crate::stations::Station;
 
 pub fn main() -> iced::Result {
     let mut settings = Settings::default();
@@ -18,12 +23,19 @@ pub fn main() -> iced::Result {
 
 #[derive(Default)]
 struct TubeTagApp {
+    // Backend
+    all_stations: Vec<Station>,
+    guessed_stations: Vec<Station>,
+    target_station: Option<Station>,
+
+    // Frontend
     station_input: String,
-    guessed_cache: Cache
+    render_cache: Cache,
 }
 
 #[derive(Debug, Clone)]
 enum Message {
+    FontLoaded(Result<(), font::Error>),
     GuessInputChanged(String),
     GuessSubmitted
 }
@@ -35,7 +47,28 @@ impl Application for TubeTagApp {
     type Flags = ();
 
     fn new(_flags: Self::Flags) -> (Self, Command<Message>) {
-        (Self::default(), Command::none())
+        let station_locations_path = format!(
+            "{}/assets/station_locations.json",
+            env!("CARGO_MANIFEST_DIR")
+        );
+        let file = File::open(station_locations_path)
+            .expect("Missing station_locations.json");
+        let stations: Vec<Station> = serde_json::from_reader(file)
+            .expect("station_locations.json was invalid");
+
+        (
+            Self {
+                all_stations: stations,
+                guessed_stations: Vec::new(),
+                target_station: None,
+                station_input: String::new(),
+                render_cache: Cache::new()
+            },
+            font::load(fs::read(format!(
+                "{}/fonts/P22 Underground.ttf",
+                env!("CARGO_MANIFEST_DIR")
+            )).unwrap()).map(Message::FontLoaded)
+        )
     }
 
     fn title(&self) -> String {
@@ -53,6 +86,7 @@ impl Application for TubeTagApp {
                 //  reset the current guess, otherwise nothing
                 self.station_input = "".to_string()
             }
+            _ => { }
         }
         Command::none()
     }
@@ -60,7 +94,7 @@ impl Application for TubeTagApp {
     fn view(&self) -> Element<Message> {
         // Construct map viewer
         let map_path = format!(
-            "{}/assets/tube-map-8k.png",
+            "{}/assets/tube-map-4k.png",
             env!("CARGO_MANIFEST_DIR")
         );
 
@@ -106,6 +140,8 @@ pub struct PubState {
     pub cursor_grabbed_at: Option<Point>,
 }
 
+const UNDERGROUND_FONT: Font = Font::with_name("P22 Underground");
+
 impl Program<Message> for TubeTagApp {
     // We have the state of the image viewer
     // So we can translate our guessed positions correctly...
@@ -128,21 +164,45 @@ impl Program<Message> for TubeTagApp {
 
         // TODO: We should only clear this if the state has changed
         //   since the last time we drew on our canvas
-        self.guessed_cache.clear();
-        let geometry = self.guessed_cache.draw(renderer, bounds.size(), |frame| {
-            let circle = Path::circle(
-                frame.center().sub(exposed.current_offset),
-                50.0 * exposed.scale
+        self.render_cache.clear();
+        let geometry = self.render_cache.draw(renderer, bounds.size(), |frame| {
+            let center = frame.center();
+            let offset = Vector::new(
+                center.x - exposed.current_offset.x,
+                center.y - exposed.current_offset.y
             );
-            frame.fill(&circle, Color::from_rgb8(255, 0, 0));
 
-            frame.fill(
-                &Path::circle(
-                    frame.center().add(Vector::new(40.0 * exposed.scale, 40.0 * exposed.scale)).sub(exposed.current_offset),
-                    10.0 * exposed.scale
-                ),
-                Color::from_rgb8(0, 255, 0)
-            )
+            for station in &self.all_stations {
+                for (index, offsets) in station.station_offsets.iter().enumerate() {
+                    // 8k Image resolution: 8262×5803
+                    let relative_x = offsets.0 / 8262.0;
+                    let relative_y = offsets.1 / 5803.0;
+                    let point = Point::new(
+                        (relative_x - 0.5) * frame.width() * exposed.scale,
+                         (relative_y - 0.5) * frame.height() * exposed.scale
+                    ).add(offset);
+
+                    let circle = Path::circle(point, 4.0 * exposed.scale);
+                    // TODO: Determine colour based on distance
+                    frame.fill(&circle, Color::from_rgb8(0, 255, 0));
+
+                    if index == station.name_data.station_offset {
+                        // TODO: Shift point by anchor
+                        let name = Text {
+                            content: station.name.clone(),
+                            position: point.add(Vector::new(5.0 * exposed.scale, -5.0 * exposed.scale)),
+                            color: Color::from_rgb8(0, 0, 0),
+                            size: Pixels(8.0 * exposed.scale),
+                            line_height: Default::default(),
+                            font: UNDERGROUND_FONT,
+                            horizontal_alignment: Horizontal::Left,
+                            vertical_alignment: Vertical::Top,
+                            shaping: Shaping::Basic,
+                        };
+                        frame.fill_text(name)
+                    }
+                }
+            }
         });
         vec![geometry]
     }
