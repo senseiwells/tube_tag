@@ -1,6 +1,7 @@
 mod render_overlay;
 
-use iced::{Color, executor, Point, Rectangle, Renderer, Size};
+use std::ops::{Add, Mul, Sub};
+use iced::{Color, executor, Point, Rectangle, Renderer, Size, Vector};
 use iced::widget::{column, container, row, image, text_input, text, Text, Column, canvas};
 use iced::{Application, Command, Element, Length, Settings, Theme};
 use iced::mouse::Cursor;
@@ -58,13 +59,16 @@ impl Application for TubeTagApp {
     fn view(&self) -> Element<Message> {
         // Construct map viewer
         let map_path = format!(
-            "{}/assets/tube-map-4k.png",
+            "{}/assets/tube-map-8k.png",
             env!("CARGO_MANIFEST_DIR")
         );
 
         let map_handle = image::Handle::from_path(map_path);
         let map_viewer = image::viewer(map_handle)
-            .width(Length::Fill);
+            .width(Length::Fill)
+            // TODO: We have a scale limiter
+            //  but we also need to limit the panning?
+            .min_scale(1.0);
 
         // Construct input field
         let guess_input = text_input("Guess a station", &self.station_input)
@@ -93,6 +97,14 @@ impl Application for TubeTagApp {
     }
 }
 
+#[derive(Debug, Clone, Copy)]
+pub struct PubState {
+    pub scale: f32,
+    pub starting_offset: Vector,
+    pub current_offset: Vector,
+    pub cursor_grabbed_at: Option<Point>,
+}
+
 impl Program<Message> for TubeTagApp {
     // We have the state of the image viewer
     // So we can translate our guessed positions correctly...
@@ -106,13 +118,33 @@ impl Program<Message> for TubeTagApp {
         bounds: Rectangle,
         cursor: Cursor
     ) -> Vec<Geometry> {
+        let copied = state.clone();
+        // We need access to the offset and scale
+        let exposed: PubState = unsafe {
+            // This is totally safe and not jank
+            std::mem::transmute(copied)
+        };
+
+        // TODO: We should only clear this if the state has changed
+        //   since the last time we drew on our canvas
+        self.guessed_cache.clear();
         let geometry = self.guessed_cache.draw(renderer, bounds.size(), |frame| {
-            println!("Center: {:?}", frame.center());
-            let circle = Path::circle(frame.center(), 50.0);
+            let circle = Path::circle(
+                frame.center().sub(exposed.current_offset),
+                50.0 * exposed.scale
+            );
             frame.fill(&circle, Color::from_rgb8(255, 0, 0));
 
-            let rect = Path::rectangle(frame.center(), Size::new(100.0, 200.0));
-            frame.fill(&rect, Color::from_rgb8(0, 0, 255));
+            // FIXME:
+            //  The following won't work because the offset and scale isn't
+            //  calculated properly and I don't have the brainpower to do the maths
+            // frame.fill(
+            //     &Path::circle(
+            //         Point::new(500.0, 0.0).sub(exposed.current_offset),
+            //         10.0 * exposed.scale
+            //     ),
+            //     Color::from_rgb8(0, 255, 0)
+            // )
         });
         vec![geometry]
     }
