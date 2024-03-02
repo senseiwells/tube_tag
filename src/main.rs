@@ -6,6 +6,7 @@ use iced::widget::{column, container, row, image, text_input, text, Text, Column
 use iced::{Application, Command, Element, Length, Settings, Theme};
 use iced::mouse::Cursor;
 use iced::widget::canvas::{Cache, Geometry, Path, Program};
+use iced::widget::canvas::path::lyon_path::geom::euclid::vec2;
 use iced::widget::image::viewer;
 use crate::render_overlay::RenderOverlay;
 
@@ -135,16 +136,13 @@ impl Program<Message> for TubeTagApp {
             );
             frame.fill(&circle, Color::from_rgb8(255, 0, 0));
 
-            // FIXME:
-            //  The following won't work because the offset and scale isn't
-            //  calculated properly and I don't have the brainpower to do the maths
-            // frame.fill(
-            //     &Path::circle(
-            //         Point::new(500.0, 0.0).sub(exposed.current_offset),
-            //         10.0 * exposed.scale
-            //     ),
-            //     Color::from_rgb8(0, 255, 0)
-            // )
+            frame.fill(
+                &Path::circle(
+                    frame.center().add(Vector::new(40.0 * exposed.scale, 40.0 * exposed.scale)).sub(exposed.current_offset),
+                    10.0 * exposed.scale
+                ),
+                Color::from_rgb8(0, 255, 0)
+            )
         });
         vec![geometry]
     }
