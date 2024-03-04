@@ -12,16 +12,17 @@ use crate::{DrawContext, UNDERGROUND_FONT};
 #[derive(Debug, Deserialize)]
 pub struct Station {
     pub name: String,
-    pub station_offsets: Vec<(f32, f32)>,
+    pub station_positions: Vec<(f32, f32)>,
     #[serde(default)]
     pub name_data: NameData
 }
 
 impl Station {
     pub fn get_render_names(&self, point: &Point, context: &DrawContext) -> Vec<Text> {
-        let size = context.y_dist_pixels(35.0);
+        let size = context.y_dist_pixels(36.0);
+        let unit_offset = self.name_data.offset;
         let unit_vec = self.name_data.anchor.unit_vec();
-        let mut offset = unit_vec.mul(size);
+        let mut offset = unit_vec.add(Vector::new(unit_offset.0, unit_offset.1)).mul(size);
         let (horizontal, vertical) = self.name_data.anchor.alignments();
 
         if let Some(names) = self.name_data.display_name.as_ref() {
@@ -56,7 +57,7 @@ impl Station {
         Text {
             content: name.clone(),
             position: point.add(offset),
-            color: Color::from_rgb8(0, 0, 0),
+            color: Color::from_rgb8(0x1B, 0x40, 0x94),
             size: Pixels(size),
             line_height: LineHeight::Relative(1.0),
             font: UNDERGROUND_FONT,
@@ -70,11 +71,13 @@ impl Station {
 #[derive(Debug, Default, Deserialize)]
 pub struct NameData {
     #[serde(default)]
-    pub station_offset: usize,
+    pub station_position: usize,
     #[serde(default)]
     pub anchor: Anchor,
     #[serde(default)]
-    pub display_name: Option<Vec<String>>
+    pub display_name: Option<Vec<String>>,
+    #[serde(default)]
+    pub offset: (f32, f32)
 }
 
 #[derive(Debug, Default, Deserialize)]

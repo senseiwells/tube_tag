@@ -7,9 +7,11 @@ use std::ops::{Add, Mul, Sub};
 use iced::{Color, executor, Font, font, Pixels, Point, Rectangle, Renderer, Vector};
 use iced::widget::{column, container, row, image, text_input, text, Column, canvas, Image};
 use iced::{Application, Command, Element, Length, Settings, Theme};
+use iced::font::{Family, Weight};
 use iced::mouse::Cursor;
 use iced::widget::canvas::{Cache, Geometry, Path, Program, Text};
 use iced::widget::image::viewer;
+use json_comments::StripComments;
 use crate::render_overlay::RenderOverlay;
 use crate::stations::Station;
 
@@ -46,13 +48,13 @@ impl Application for TubeTagApp {
 
     fn new(_flags: Self::Flags) -> (Self, Command<Message>) {
         let station_locations_path = format!(
-            "{}/assets/station_locations.json",
+            "{}/assets/station_locations.json5",
             env!("CARGO_MANIFEST_DIR")
         );
         let file = File::open(station_locations_path)
-            .expect("Missing station_locations.json");
-        let stations: Vec<Station> = serde_json::from_reader(file)
-            .expect("station_locations.json was invalid");
+            .expect("Missing station_locations.json5");
+        let stations: Vec<Station> = serde_json::from_reader(StripComments::new(file))
+            .expect("station_locations.json5 was invalid");
 
         (
             Self {
@@ -63,7 +65,7 @@ impl Application for TubeTagApp {
                 render_cache: Cache::new()
             },
             font::load(fs::read(format!(
-                "{}/fonts/P22 Underground.ttf",
+                "{}/fonts/P22UndergroundPro-Bold.ttf",
                 env!("CARGO_MANIFEST_DIR")
             )).unwrap()).map(Message::FontLoaded)
         )
@@ -92,7 +94,7 @@ impl Application for TubeTagApp {
     fn view(&self) -> Element<Message> {
         // Construct map viewer
         let map_path = format!(
-            "{}/assets/tube-map-4k.png",
+            "{}/assets/tube-map-8k.png",
             env!("CARGO_MANIFEST_DIR")
         );
 
@@ -139,7 +141,11 @@ pub struct PubState {
     pub cursor_grabbed_at: Option<Point>,
 }
 
-const UNDERGROUND_FONT: Font = Font::with_name("P22 Underground");
+const UNDERGROUND_FONT: Font = Font {
+    family: Family::Name("P22 Underground Pro"),
+    weight: Weight::Bold,
+    ..Font::DEFAULT
+};
 
 impl Program<Message> for TubeTagApp {
     // We have the state of the image viewer
@@ -174,7 +180,7 @@ impl Program<Message> for TubeTagApp {
             let context = DrawContext::new(frame.width(), frame.height(), exposed.scale);
 
             for station in &self.all_stations {
-                for (index, offsets) in station.station_offsets.iter().enumerate() {
+                for (index, offsets) in station.station_positions.iter().enumerate() {
                     let relative_x = offsets.0 * DrawContext::REL_X;
                     let relative_y = offsets.1 * DrawContext::REL_Y;
                     let point = Point::new(
@@ -185,9 +191,9 @@ impl Program<Message> for TubeTagApp {
                     let circle = Path::circle(point, context.x_dist_pixels(32.0));
 
                     // TODO: Determine colour based on distance
-                    frame.fill(&circle, Color::from_rgb8(0, 255, 0));
+                    // frame.fill(&circle, Color::from_rgb8(0, 255, 0));
 
-                    if index == station.name_data.station_offset {
+                    if index == station.name_data.station_position {
                         for name in station.get_render_names(&point, &context) {
                             frame.fill_text(name)
                         }
