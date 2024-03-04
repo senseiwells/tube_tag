@@ -7,5 +7,41 @@
     "name_data": {
       "anchor": "East"
     }
+  },
+  {
+    "name": "Theydon Bois",
+    "station_offsets": [
+      [6584, 260]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Debden",
+    "station_offsets": [
+      [6584, 350]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Loughton",
+    "station_offsets": [
+      [6584, 440]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Buckhurst Hill",
+    "station_offsets": [
+      [6584, 530]
+    ],
+    "name_data": {
+      "anchor": "South"
+    }
   }
 ]

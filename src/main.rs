@@ -5,13 +5,11 @@ use std::fs;
 use std::fs::File;
 use std::ops::{Add, Mul, Sub};
 use iced::{Color, executor, Font, font, Pixels, Point, Rectangle, Renderer, Vector};
-use iced::widget::{column, container, row, image, text_input, text, Column, canvas};
+use iced::widget::{column, container, row, image, text_input, text, Column, canvas, Image};
 use iced::{Application, Command, Element, Length, Settings, Theme};
-use iced::alignment::{Horizontal, Vertical};
 use iced::mouse::Cursor;
 use iced::widget::canvas::{Cache, Geometry, Path, Program, Text};
 use iced::widget::image::viewer;
-use iced::widget::text::Shaping;
 use crate::render_overlay::RenderOverlay;
 use crate::stations::Station;
 
@@ -99,6 +97,7 @@ impl Application for TubeTagApp {
         );
 
         let map_handle = image::Handle::from_path(map_path);
+
         let map_viewer = image::viewer(map_handle)
             .width(Length::Fill)
             // TODO: We have a scale limiter
@@ -151,9 +150,9 @@ impl Program<Message> for TubeTagApp {
         &self,
         state: &Self::State,
         renderer: &Renderer,
-        theme: &Theme,
+        _theme: &Theme,
         bounds: Rectangle,
-        cursor: Cursor
+        _cursor: Cursor
     ) -> Vec<Geometry> {
         let copied = state.clone();
         // We need access to the offset and scale
@@ -172,38 +171,66 @@ impl Program<Message> for TubeTagApp {
                 center.y - exposed.current_offset.y
             );
 
+            let context = DrawContext::new(frame.width(), frame.height(), exposed.scale);
+
             for station in &self.all_stations {
                 for (index, offsets) in station.station_offsets.iter().enumerate() {
-                    // 8k Image resolution: 8262×5803
-                    let relative_x = offsets.0 / 8262.0;
-                    let relative_y = offsets.1 / 5803.0;
+                    let relative_x = offsets.0 * DrawContext::REL_X;
+                    let relative_y = offsets.1 * DrawContext::REL_Y;
                     let point = Point::new(
-                        (relative_x - 0.5) * frame.width() * exposed.scale,
-                         (relative_y - 0.5) * frame.height() * exposed.scale
+                        context.x_dist_percent(relative_x - 0.5),
+                        context.y_dist_percent(relative_y - 0.5)
                     ).add(offset);
 
-                    let circle = Path::circle(point, 4.0 * exposed.scale);
+                    let circle = Path::circle(point, context.x_dist_pixels(32.0));
+
                     // TODO: Determine colour based on distance
                     frame.fill(&circle, Color::from_rgb8(0, 255, 0));
 
                     if index == station.name_data.station_offset {
-                        // TODO: Shift point by anchor
-                        let name = Text {
-                            content: station.name.clone(),
-                            position: point.add(Vector::new(5.0 * exposed.scale, -5.0 * exposed.scale)),
-                            color: Color::from_rgb8(0, 0, 0),
-                            size: Pixels(8.0 * exposed.scale),
-                            line_height: Default::default(),
-                            font: UNDERGROUND_FONT,
-                            horizontal_alignment: Horizontal::Left,
-                            vertical_alignment: Vertical::Top,
-                            shaping: Shaping::Basic,
-                        };
-                        frame.fill_text(name)
+                        for name in station.get_render_names(&point, &context) {
+                            frame.fill_text(name)
+                        }
                     }
                 }
             }
         });
         vec![geometry]
+    }
+}
+
+struct DrawContext {
+    frame_width: f32,
+    frame_height: f32,
+    scale: f32
+}
+
+impl DrawContext {
+    // 8k Image resolution: 8262×5803
+    const REL_X: f32 = 1.0 / 8262.0;
+    const REL_Y: f32 = 1.0 / 5803.0;
+
+    fn new(frame_width: f32, frame_height: f32, scale: f32) -> Self {
+        Self {
+            frame_width,
+            frame_height,
+            scale
+        }
+    }
+
+    fn x_dist_pixels(&self, dist: f32) -> f32 {
+        self.x_dist_percent(dist * Self::REL_X)
+    }
+
+    fn y_dist_pixels(&self, dist: f32) -> f32 {
+        self.y_dist_percent(dist * Self::REL_Y)
+    }
+
+    fn x_dist_percent(&self, percent: f32) -> f32 {
+        percent * self.frame_width * self.scale
+    }
+
+    fn y_dist_percent(&self, percent: f32) -> f32 {
+        percent * self.frame_height * self.scale
     }
 }
