@@ -1,0 +1,326 @@
+[
+  // ===== CENTRAL LINE START =====
+  // Epping -> Snaresbrook
+  {
+    "name": "Epping",
+    "station_positions": [
+      [6584, 172]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Theydon Bois",
+    "station_positions": [
+      [6584, 260]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Debden",
+    "station_positions": [
+      [6584, 350]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Loughton",
+    "station_positions": [
+      [6584, 440]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Buckhurst Hill",
+    "station_positions": [
+      [6584, 530]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Woodford",
+    "station_positions": [
+      [6584, 888]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "South Woodford",
+    "station_positions": [
+      [6584, 988]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Snaresbrook",
+    "station_positions": [
+      [6584, 1088]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+
+  // Roding Valley -> Wanstead
+  {
+    "name": "Roding Valley",
+    "station_positions": [
+      [6700, 756]
+    ],
+    "name_data": {
+      "anchor": "North",
+      "display_name": [
+        "Roding",
+        "Valley"
+      ]
+    }
+  },
+  {
+    "name": "Chigwell",
+    "station_positions": [
+      [6835, 756]
+    ],
+    "name_data": {
+      "anchor": "South"
+    }
+  },
+  {
+    "name": "Grange Hill",
+    "station_positions": [
+      [6938, 756]
+    ],
+    "name_data": {
+      "anchor": "North",
+      "display_name": [
+        "Grange",
+        "Hill"
+      ]
+    }
+  },
+  {
+    "name": "Hainault",
+    "station_positions": [
+      [6995, 870]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Fairlop",
+    "station_positions": [
+      [6995, 966]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Barkingside",
+    "station_positions": [
+      [6995, 1063]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Newbury Park",
+    "station_positions": [
+      [6995, 1176]
+    ],
+    "name_data": {
+      "anchor": "East",
+      "display_name": [
+        "Newbury",
+        "Park"
+      ]
+    }
+  },
+  {
+    "name": "Gants Hill",
+    "station_positions": [
+      [6938, 1268]
+    ],
+    "name_data": {
+      "anchor": "South",
+      "display_name": [
+        "Gants",
+        "Hill"
+      ]
+    }
+  },
+  {
+    "name": "Redbridge",
+    "station_positions": [
+      [6820, 1268]
+    ],
+    "name_data": {
+      "anchor": "North"
+    }
+  },
+  {
+    "name": "Wanstead",
+    "station_positions": [
+      [6700, 1268]
+    ],
+    "name_data": {
+      "anchor": "South"
+    }
+  },
+
+  // Leytonstone -> North Acton
+  {
+    "name": "Leytonstone",
+    "station_positions": [
+      [6584, 1398]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Leyton",
+    "station_positions": [
+      [6584, 1658]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Stratford",
+    "station_positions": [
+      [6520, 1900],
+      [6685, 1900]
+    ],
+    "name_data": {
+      "station_position": 1,
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Mile End",
+    "station_positions": [
+      [5995, 2340],
+      [5995, 2395]
+    ],
+    "name_data": {
+      "anchor": "North"
+    }
+  },
+  {
+    "name": "Bethnal Green",
+    "station_positions": [
+      [5741, 2340]
+    ],
+    "name_data": {
+      "anchor": "North"
+    }
+  },
+  {
+    "name": "Liverpool Street",
+    "station_positions": [
+      [5022, 2612]
+    ],
+    "name_data": {
+      "anchor": "SouthEast",
+      "offset": [-0.8, 0.4],
+      "display_name": [
+        "Liverpool",
+        "Street"
+      ]
+    }
+  },
+  {
+    "name": "Bank",
+    "station_positions": [
+      [4726, 2860],
+      [4811, 2944]
+    ],
+    "name_data": {
+      "anchor": "North"
+    }
+  },
+  {
+    "name": "St. Paul's",
+    "station_positions": [
+      [4567, 2860 ]
+    ],
+    "name_data": {
+      "anchor": "South"
+    }
+  },
+  {
+    "name": "Chancery Lane",
+    "station_positions": [
+      [4388, 2764]
+    ],
+    "name_data": {
+      "anchor": "NorthEast",
+      "offset": [0, 0.4]
+    }
+  },
+  {
+    "name": "Holborn",
+    "station_positions": [
+      [4166, 2695]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  {
+    "name": "Tottenham Court Road",
+    "station_positions": [
+      [3955, 2695]
+    ],
+    "name_data": {
+      "anchor": "SouthWest",
+      "display_name": [
+        "Tottenham",
+        "Court Road"
+      ]
+    }
+  },
+  {
+    "name": "Oxford Circus",
+    "station_positions": [
+      [3605, 2695]
+    ],
+    "name_data": {
+      "anchor": "NorthWest",
+      "display_name": [
+        "Oxford",
+        "Circus"
+      ]
+    }
+  },
+  {
+    "name": "Bond Street",
+    "station_positions": [
+      [3323, 2695]
+    ],
+    "name_data": {
+      "anchor": "NorthWest",
+      "display_name": [
+        "Bond",
+        "Street"
+      ]
+    }
+  }
+  // ===== CENTRAL LINE END =====
+]
