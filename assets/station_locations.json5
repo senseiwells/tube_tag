@@ -321,6 +321,146 @@
         "Street"
       ]
     }
+  },
+  {
+    "name": "Marble Arch",
+    "station_positions": [
+      [3170, 2752]
+    ],
+    "name_data": {
+      "anchor": "NorthWest"
+    }
+  },
+  {
+    "name": "Lancaster Gate",
+    "station_positions": [
+      [3092, 2832]
+    ],
+    "name_data": {
+      "anchor": "SouthEast",
+      "display_name": [
+        "Lancaster",
+        "Gate"
+      ]
+    }
+  },
+  {
+    "name": "Queensway",
+    "station_positions": [
+      [2916, 2860]
+    ],
+    "name_data": {
+      "anchor": "South"
+    }
+  },
+  {
+    "name": "Notting Hill Gate",
+    "station_positions": [
+      [2691, 2860]
+    ],
+    "name_data": {
+      "anchor": "NorthEast",
+      "display_name": [
+        "Notting",
+        "Hill Gate"
+      ]
+    }
+  },
+  {
+    "name": "Holland Park",
+    "station_positions": [
+      [2553, 2860]
+    ],
+    "name_data": {
+      "anchor": "South",
+      "display_name": [
+        "Holland",
+        "Park"
+      ]
+    }
+  },
+  {
+    "name": "Shepherd's Bush",
+    "station_positions": [
+      [2396, 2860]
+    ],
+    "name_data": {
+      "anchor": "North",
+      "display_name": [
+        "Shepherd's",
+        "Bush"
+      ]
+    }
+  },
+  {
+    "name": "White City",
+    "station_positions": [
+      [2130, 2860]
+    ],
+    "name_data": {
+      "anchor": "North",
+      "display_name": [
+        "White",
+        "City"
+      ]
+    }
+  },
+  {
+    "name": "East Acton",
+    "station_positions": [
+      [1940, 2860]
+    ],
+    "name_data": {
+      "anchor": "North",
+      "display_name": [
+        "East",
+        "Acton"
+      ]
+    }
+  },
+  {
+    "name": "North Acton",
+    "station_positions": [
+      [1790 , 2860]
+    ],
+    "name_data": {
+      "anchor": "South",
+      "display_name": [
+        "North",
+        "Acton"
+      ]
+    }
+  },
+
+  // West Acton -> Ealing Broadway
+  {
+    "name": "West Acton",
+    "station_positions": [
+      [1484, 2860]
+    ],
+    "name_data": {
+      "anchor": "South",
+      "display_name": [
+        "West",
+        "Acton"
+      ]
+    }
+  },
+  {
+    "name": "Ealing Broadway",
+    "station_positions": [
+      [1194, 2870]
+    ],
+    "name_data": {
+      "anchor": "West",
+      "display_name": [
+        "Ealing",
+        "Broadway"
+      ]
+    }
   }
+
+
+
   // ===== CENTRAL LINE END =====
 ]
