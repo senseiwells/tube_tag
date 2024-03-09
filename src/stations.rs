@@ -12,6 +12,8 @@ use crate::{DrawContext, UNDERGROUND_FONT};
 #[derive(Debug, Deserialize)]
 pub struct Station {
     pub name: String,
+    #[serde(default)]
+    pub lines: Vec<String>,
     pub station_positions: Vec<(f32, f32)>,
     #[serde(default)]
     pub name_data: NameData

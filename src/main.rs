@@ -191,7 +191,7 @@ impl Program<Message> for TubeTagApp {
                     let circle = Path::circle(point, context.x_dist_pixels(32.0));
 
                     // TODO: Determine colour based on distance
-                    // frame.fill(&circle, Color::from_rgb8(0, 255, 0));
+                    frame.fill(&circle, Color::from_rgb8(0, 255, 0));
 
                     if index == station.name_data.station_position {
                         for name in station.get_render_names(&point, &context) {
