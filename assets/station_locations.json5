@@ -82,7 +82,7 @@
     ],
     "name_data": {
       "anchor": "North",
-      "display_name": [
+      "name_lines": [
         "Roding",
         "Valley"
       ]
@@ -104,7 +104,7 @@
     ],
     "name_data": {
       "anchor": "North",
-      "display_name": [
+      "name_lines": [
         "Grange",
         "Hill"
       ]
@@ -144,7 +144,7 @@
     ],
     "name_data": {
       "anchor": "East",
-      "display_name": [
+      "name_lines": [
         "Newbury",
         "Park"
       ]
@@ -157,7 +157,7 @@
     ],
     "name_data": {
       "anchor": "South",
-      "display_name": [
+      "name_lines": [
         "Gants",
         "Hill"
       ]
@@ -204,11 +204,10 @@
   {
     "name": "Stratford",
     "station_positions": [
-      [6520, 1900],
-      [6685, 1900]
+      [6685, 1900],
+      [6520, 1900]
     ],
     "name_data": {
-      "station_position": 1,
       "anchor": "East"
     }
   },
@@ -239,7 +238,7 @@
     "name_data": {
       "anchor": "SouthEast",
       "offset": [-0.8, 0.4],
-      "display_name": [
+      "name_lines": [
         "Liverpool",
         "Street"
       ]
@@ -290,7 +289,7 @@
     ],
     "name_data": {
       "anchor": "SouthWest",
-      "display_name": [
+      "name_lines": [
         "Tottenham",
         "Court Road"
       ]
@@ -303,7 +302,7 @@
     ],
     "name_data": {
       "anchor": "NorthWest",
-      "display_name": [
+      "name_lines": [
         "Oxford",
         "Circus"
       ]
@@ -316,7 +315,7 @@
     ],
     "name_data": {
       "anchor": "NorthWest",
-      "display_name": [
+      "name_lines": [
         "Bond",
         "Street"
       ]

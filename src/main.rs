@@ -1,19 +1,23 @@
 mod render_overlay;
 mod stations;
+mod coordinate_system;
+mod resource_util;
 
 use std::fs;
 use std::fs::File;
-use std::ops::{Add, Mul, Sub};
-use iced::{Color, executor, Font, font, Pixels, Point, Rectangle, Renderer, Vector};
-use iced::widget::{column, container, row, image, text_input, text, Column, canvas, Image};
+use std::ops::{Add};
+use iced::{Color, executor, Font, font, Point, Rectangle, Renderer, Vector};
+use iced::widget::{container, row, image, text_input, Column, canvas};
 use iced::{Application, Command, Element, Length, Settings, Theme};
 use iced::font::{Family, Weight};
 use iced::mouse::Cursor;
-use iced::widget::canvas::{Cache, Geometry, Path, Program, Text};
+use iced::widget::canvas::{Cache, Geometry, Path, Program};
 use iced::widget::image::viewer;
 use json_comments::StripComments;
 use crate::render_overlay::RenderOverlay;
 use crate::stations::Station;
+use crate::coordinate_system::CoordinateSystem;
+use crate::resource_util::convert_relative_path;
 
 pub fn main() -> iced::Result {
     let mut settings = Settings::default();
@@ -47,28 +51,28 @@ impl Application for TubeTagApp {
     type Flags = ();
 
     fn new(_flags: Self::Flags) -> (Self, Command<Message>) {
-        let station_locations_path = format!(
-            "{}/assets/station_locations.json5",
-            env!("CARGO_MANIFEST_DIR")
-        );
-        let file = File::open(station_locations_path)
+        // Load station locations and deserialize
+        let station_locations_path = convert_relative_path("assets/station_locations.json5");
+        let station_locations_file = File::open(station_locations_path)
             .expect("Missing station_locations.json5");
-        let stations: Vec<Station> = serde_json::from_reader(StripComments::new(file))
+        let stations: Vec<Station> = serde_json::from_reader(StripComments::new(station_locations_file))
             .expect("station_locations.json5 was invalid");
 
-        (
-            Self {
-                all_stations: stations,
-                guessed_stations: Vec::new(),
-                target_station: None,
-                station_input: String::new(),
-                render_cache: Cache::new()
-            },
-            font::load(fs::read(format!(
-                "{}/fonts/P22UndergroundPro-Bold.ttf",
-                env!("CARGO_MANIFEST_DIR")
-            )).unwrap()).map(Message::FontLoaded)
-        )
+        // Create a command to load the font
+        let font_filepath = convert_relative_path("fonts/P22UndergroundPro-Bold.ttf");
+        let load_font_command = font::load(fs::read(font_filepath).unwrap()).map(Message::FontLoaded);
+
+        // Construct a TubeTagApp object
+        let ret = Self {
+            all_stations: stations,
+            guessed_stations: Vec::new(),
+            target_station: None,
+            station_input: String::new(),
+            render_cache: Cache::new()
+        };
+
+        // Return the constructed object and the command
+        (ret, load_font_command)
     }
 
     fn title(&self) -> String {
@@ -93,13 +97,8 @@ impl Application for TubeTagApp {
 
     fn view(&self) -> Element<Message> {
         // Construct map viewer
-        let map_path = format!(
-            "{}/assets/tube-map-8k.png",
-            env!("CARGO_MANIFEST_DIR")
-        );
-
+        let map_path = convert_relative_path("assets/tube-map-8k.png");
         let map_handle = image::Handle::from_path(map_path);
-
         let map_viewer = image::viewer(map_handle)
             .width(Length::Fill)
             // TODO: We have a scale limiter
@@ -148,8 +147,6 @@ const UNDERGROUND_FONT: Font = Font {
 };
 
 impl Program<Message> for TubeTagApp {
-    // We have the state of the image viewer
-    // So we can translate our guessed positions correctly...
     type State = viewer::State;
 
     fn draw(
@@ -160,83 +157,50 @@ impl Program<Message> for TubeTagApp {
         bounds: Rectangle,
         _cursor: Cursor
     ) -> Vec<Geometry> {
-        let copied = state.clone();
-        // We need access to the offset and scale
-        let exposed: PubState = unsafe {
-            // This is totally safe and not jank
-            std::mem::transmute(copied)
-        };
+        // Clone the state and cast to PubState to extract offsets
+        let exposed_state: PubState = unsafe { std::mem::transmute(state.clone()) };
 
         // TODO: We should only clear this if the state has changed
         //   since the last time we drew on our canvas
         self.render_cache.clear();
+
+        // Rendering
         let geometry = self.render_cache.draw(renderer, bounds.size(), |frame| {
             let center = frame.center();
             let offset = Vector::new(
-                center.x - exposed.current_offset.x,
-                center.y - exposed.current_offset.y
+                center.x - exposed_state.current_offset.x,
+                center.y - exposed_state.current_offset.y
             );
 
-            let context = DrawContext::new(frame.width(), frame.height(), exposed.scale);
+            let coords = CoordinateSystem::new(frame.width(), frame.height(), exposed_state.scale);
 
             for station in &self.all_stations {
                 for (index, offsets) in station.station_positions.iter().enumerate() {
-                    let relative_x = offsets.0 * DrawContext::REL_X;
-                    let relative_y = offsets.1 * DrawContext::REL_Y;
+                    let relative_x = offsets.0 * CoordinateSystem::REL_X;
+                    let relative_y = offsets.1 * CoordinateSystem::REL_Y;
                     let point = Point::new(
-                        context.x_dist_percent(relative_x - 0.5),
-                        context.y_dist_percent(relative_y - 0.5)
+                        coords.x_dist_percent(relative_x - 0.5),
+                        coords.y_dist_percent(relative_y - 0.5)
                     ).add(offset);
 
-                    let circle = Path::circle(point, context.x_dist_pixels(32.0));
+                    let circle = Path::circle(point, coords.x_dist_pixels(32.0));
 
                     // TODO: Determine colour based on distance
-                    // frame.fill(&circle, Color::from_rgb8(0, 255, 0));
+                    frame.fill(&circle, Color::from_rgb8(0, 255, 0));
 
-                    if index == station.name_data.station_position {
-                        for name in station.get_render_names(&point, &context) {
+                    // Render station name text
+                    if index == 0
+                    {
+                        // Loop over each line in the name and render it
+                        for name in station.get_render_lines(&point, &coords) {
                             frame.fill_text(name)
                         }
                     }
                 }
             }
         });
+
+        // Place geometry in a vector and return
         vec![geometry]
-    }
-}
-
-struct DrawContext {
-    frame_width: f32,
-    frame_height: f32,
-    scale: f32
-}
-
-impl DrawContext {
-    // 8k Image resolution: 8262×5803
-    const REL_X: f32 = 1.0 / 8262.0;
-    const REL_Y: f32 = 1.0 / 5803.0;
-
-    fn new(frame_width: f32, frame_height: f32, scale: f32) -> Self {
-        Self {
-            frame_width,
-            frame_height,
-            scale
-        }
-    }
-
-    fn x_dist_pixels(&self, dist: f32) -> f32 {
-        self.x_dist_percent(dist * Self::REL_X)
-    }
-
-    fn y_dist_pixels(&self, dist: f32) -> f32 {
-        self.y_dist_percent(dist * Self::REL_Y)
-    }
-
-    fn x_dist_percent(&self, percent: f32) -> f32 {
-        percent * self.frame_width * self.scale
-    }
-
-    fn y_dist_percent(&self, percent: f32) -> f32 {
-        percent * self.frame_height * self.scale
     }
 }

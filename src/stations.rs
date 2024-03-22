@@ -1,13 +1,11 @@
 use std::f32::consts::SQRT_2;
-use std::ops::{Add, Mul, Sub};
+use std::ops::{Add, Mul};
 use iced::{Color, Pixels, Point, Vector};
 use iced::advanced::text::{LineHeight, Shaping};
 use iced::alignment::{Horizontal, Vertical};
 use iced::widget::canvas::Text;
-use serde::{Deserialize, Deserializer, Serializer};
-use serde::de::{Error, Visitor};
-use serde::ser::SerializeTuple;
-use crate::{DrawContext, UNDERGROUND_FONT};
+use serde::{Deserialize};
+use crate::{CoordinateSystem, UNDERGROUND_FONT};
 
 #[derive(Debug, Deserialize)]
 pub struct Station {
@@ -18,16 +16,15 @@ pub struct Station {
 }
 
 impl Station {
-    pub fn get_render_names(&self, point: &Point, context: &DrawContext) -> Vec<Text> {
+    pub fn get_render_lines(&self, point: &Point, context: &CoordinateSystem) -> Vec<Text> {
         let size = context.y_dist_pixels(36.0);
         let unit_offset = self.name_data.offset;
         let unit_vec = self.name_data.anchor.unit_vec();
         let mut offset = unit_vec.add(Vector::new(unit_offset.0, unit_offset.1)).mul(size);
         let (horizontal, vertical) = self.name_data.anchor.alignments();
 
-        if let Some(names) = self.name_data.display_name.as_ref() {
-            // The GUI library doesn't handle multi-line text rendering
-            // well, so lets handle it ourselves :)
+        if let Some(names) = self.name_data.name_lines.as_ref() {
+            // Multiline name
             let lines = names.len() as f32;
             let mut shift = size * 0.5 * lines;
 
@@ -42,6 +39,7 @@ impl Station {
                 Self::name_to_text(name, point, new_offset, size, horizontal, vertical)
             }).collect()
         } else {
+            // Single line name
             vec![Self::name_to_text(&self.name, point, offset, size, horizontal, vertical)]
         }
     }
@@ -71,11 +69,9 @@ impl Station {
 #[derive(Debug, Default, Deserialize)]
 pub struct NameData {
     #[serde(default)]
-    pub station_position: usize,
-    #[serde(default)]
     pub anchor: Anchor,
     #[serde(default)]
-    pub display_name: Option<Vec<String>>,
+    pub name_lines: Option<Vec<String>>,
     #[serde(default)]
     pub offset: (f32, f32)
 }
