@@ -3,6 +3,7 @@
   // Epping -> Snaresbrook
   {
     "name": "Epping",
+    "lines": ["Central"],
     "station_positions": [
       [6584, 172]
     ],
@@ -12,6 +13,7 @@
   },
   {
     "name": "Theydon Bois",
+    "lines": ["Central"],
     "station_positions": [
       [6584, 260]
     ],
@@ -21,6 +23,7 @@
   },
   {
     "name": "Debden",
+    "lines": ["Central"],
     "station_positions": [
       [6584, 350]
     ],
@@ -30,6 +33,7 @@
   },
   {
     "name": "Loughton",
+    "lines": ["Central"],
     "station_positions": [
       [6584, 440]
     ],
@@ -39,6 +43,7 @@
   },
   {
     "name": "Buckhurst Hill",
+    "lines": ["Central"],
     "station_positions": [
       [6584, 530]
     ],
@@ -48,6 +53,7 @@
   },
   {
     "name": "Woodford",
+    "lines": ["Central"],
     "station_positions": [
       [6584, 888]
     ],
@@ -57,6 +63,7 @@
   },
   {
     "name": "South Woodford",
+    "lines": ["Central"],
     "station_positions": [
       [6584, 988]
     ],
@@ -66,6 +73,7 @@
   },
   {
     "name": "Snaresbrook",
+    "lines": ["Central"],
     "station_positions": [
       [6584, 1088]
     ],
@@ -77,6 +85,7 @@
   // Roding Valley -> Wanstead
   {
     "name": "Roding Valley",
+    "lines": ["Central"],
     "station_positions": [
       [6700, 756]
     ],
@@ -90,6 +99,7 @@
   },
   {
     "name": "Chigwell",
+    "lines": ["Central"],
     "station_positions": [
       [6835, 756]
     ],
@@ -99,6 +109,7 @@
   },
   {
     "name": "Grange Hill",
+    "lines": ["Central"],
     "station_positions": [
       [6938, 756]
     ],
@@ -112,6 +123,7 @@
   },
   {
     "name": "Hainault",
+    "lines": ["Central"],
     "station_positions": [
       [6995, 870]
     ],
@@ -121,6 +133,7 @@
   },
   {
     "name": "Fairlop",
+    "lines": ["Central"],
     "station_positions": [
       [6995, 966]
     ],
@@ -130,6 +143,7 @@
   },
   {
     "name": "Barkingside",
+    "lines": ["Central"],
     "station_positions": [
       [6995, 1063]
     ],
@@ -139,6 +153,7 @@
   },
   {
     "name": "Newbury Park",
+    "lines": ["Central"],
     "station_positions": [
       [6995, 1176]
     ],
@@ -152,6 +167,7 @@
   },
   {
     "name": "Gants Hill",
+    "lines": ["Central"],
     "station_positions": [
       [6938, 1268]
     ],
@@ -165,6 +181,7 @@
   },
   {
     "name": "Redbridge",
+    "lines": ["Central"],
     "station_positions": [
       [6820, 1268]
     ],
@@ -174,6 +191,7 @@
   },
   {
     "name": "Wanstead",
+    "lines": ["Central"],
     "station_positions": [
       [6700, 1268]
     ],
@@ -185,6 +203,7 @@
   // Leytonstone -> North Acton
   {
     "name": "Leytonstone",
+    "lines": ["Central"],
     "station_positions": [
       [6584, 1398]
     ],
@@ -194,6 +213,7 @@
   },
   {
     "name": "Leyton",
+    "lines": ["Central"],
     "station_positions": [
       [6584, 1658]
     ],
@@ -203,6 +223,10 @@
   },
   {
     "name": "Stratford",
+    "lines": [
+      "Central",
+      "Victoria"
+    ],
     "station_positions": [
       [6685, 1900],
       [6520, 1900]
@@ -213,6 +237,11 @@
   },
   {
     "name": "Mile End",
+    "lines": [
+      "Central",
+      "District",
+      "Hammersmith and City"
+    ],
     "station_positions": [
       [5995, 2340],
       [5995, 2395]
@@ -223,6 +252,7 @@
   },
   {
     "name": "Bethnal Green",
+    "lines": ["Central"],
     "station_positions": [
       [5741, 2340]
     ],
@@ -232,6 +262,12 @@
   },
   {
     "name": "Liverpool Street",
+    "lines": [
+      "Central",
+      "Circle",
+      "Hammersmith and City",
+      "Metropolitan"
+    ],
     "station_positions": [
       [5022, 2612]
     ],
@@ -246,6 +282,10 @@
   },
   {
     "name": "Bank",
+    "lines": [
+      "Central",
+      "Waterloo and City"
+    ],
     "station_positions": [
       [4726, 2860],
       [4811, 2944]
@@ -256,6 +296,7 @@
   },
   {
     "name": "St. Paul's",
+    "lines": ["Central"],
     "station_positions": [
       [4567, 2860 ]
     ],
@@ -265,6 +306,7 @@
   },
   {
     "name": "Chancery Lane",
+    "lines": ["Central"],
     "station_positions": [
       [4388, 2764]
     ],
@@ -275,6 +317,10 @@
   },
   {
     "name": "Holborn",
+    "lines": [
+      "Central",
+      "Piccadilly"
+    ],
     "station_positions": [
       [4166, 2695]
     ],
@@ -284,6 +330,10 @@
   },
   {
     "name": "Tottenham Court Road",
+    "lines": [
+      "Central",
+      "Northern"
+    ],
     "station_positions": [
       [3955, 2695]
     ],
@@ -297,6 +347,10 @@
   },
   {
     "name": "Oxford Circus",
+    "lines": [
+      "Central",
+      "Victoria"
+    ],
     "station_positions": [
       [3605, 2695]
     ],
@@ -310,6 +364,10 @@
   },
   {
     "name": "Bond Street",
+    "lines": [
+      "Central",
+      "Jubilee"
+    ],
     "station_positions": [
       [3323, 2695]
     ],
@@ -320,6 +378,771 @@
         "Street"
       ]
     }
-  }
+  },
+  {
+    "name": "Marble Arch",
+    "lines": ["Central"],
+    "station_positions": [
+      [3170, 2752]
+    ],
+    "name_data": {
+      "anchor": "NorthWest"
+    }
+  },
+  {
+    "name": "Lancaster Gate",
+    "lines": ["Central"],
+    "station_positions": [
+      [3092, 2832]
+    ],
+    "name_data": {
+      "anchor": "SouthEast",
+      "display_name": [
+        "Lancaster",
+        "Gate"
+      ]
+    }
+  },
+  {
+    "name": "Queensway",
+    "lines": ["Central"],
+    "station_positions": [
+      [2916, 2860]
+    ],
+    "name_data": {
+      "anchor": "South"
+    }
+  },
+  {
+    "name": "Notting Hill Gate",
+    "lines": [
+      "Central",
+      "Circle",
+      "District"
+    ],
+    "station_positions": [
+      [2691, 2860]
+    ],
+    "name_data": {
+      "anchor": "NorthEast",
+      "offset": [0.4, 0],
+      "display_name": [
+        "Notting",
+        "Hill Gate"
+      ]
+    }
+  },
+  {
+    "name": "Holland Park",
+    "lines": ["Central"],
+    "station_positions": [
+      [2553, 2860]
+    ],
+    "name_data": {
+      "anchor": "South",
+      "display_name": [
+        "Holland",
+        "Park"
+      ]
+    }
+  },
+  {
+    "name": "Shepherd's Bush",
+    "lines": ["Central"],
+    "station_positions": [
+      [2396, 2860]
+    ],
+    "name_data": {
+      "anchor": "North",
+      "display_name": [
+        "Shepherd's",
+        "Bush"
+      ]
+    }
+  },
+  {
+    "name": "White City",
+    "lines": ["Central"],
+    "station_positions": [
+      [2130, 2860]
+    ],
+    "name_data": {
+      "anchor": "North",
+      "display_name": [
+        "White",
+        "City"
+      ]
+    }
+  },
+  {
+    "name": "East Acton",
+    "lines": ["Central"],
+    "station_positions": [
+      [1940, 2860]
+    ],
+    "name_data": {
+      "anchor": "North",
+      "display_name": [
+        "East",
+        "Acton"
+      ]
+    }
+  },
+  {
+    "name": "North Acton",
+    "lines": ["Central"],
+    "station_positions": [
+      [1798 , 2860]
+    ],
+    "name_data": {
+      "anchor": "South",
+      "display_name": [
+        "North",
+        "Acton"
+      ]
+    }
+  },
+
+  // West Acton -> Ealing Broadway
+  {
+    "name": "West Acton",
+    "lines": ["Central"],
+    "station_positions": [
+      [1484, 2860]
+    ],
+    "name_data": {
+      "anchor": "South",
+      "display_name": [
+        "West",
+        "Acton"
+      ]
+    }
+  },
+  {
+    "name": "Ealing Broadway",
+    "lines": [
+      "Central",
+      "District"
+    ],
+    "station_positions": [
+      [1194, 2870]
+    ],
+    "name_data": {
+      "anchor": "West",
+      "display_name": [
+        "Ealing",
+        "Broadway"
+      ]
+    }
+  },
+
+  // Hanger Lane -> Perivale
+  {
+    "name": "Hanger Lane",
+    "lines": ["Central"],
+    "station_positions": [
+      [1214, 2406]
+    ],
+    "name_data": {
+      "anchor": "SouthWest"
+    }
+  },
+  {
+    "name": "Perivale",
+    "lines": ["Central"],
+    "station_positions": [
+      [1046, 2237]
+    ],
+    "name_data": {
+      "anchor": "SouthWest"
+    }
+  },
+  {
+    "name": "Greenford",
+    "lines": ["Central"],
+    "station_positions": [
+      [844, 2037]
+    ],
+    "name_data": {
+      "anchor": "SouthWest"
+    }
+  },
+  {
+    "name": "Northolt",
+    "lines": ["Central"],
+    "station_positions": [
+      [738, 1754]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  {
+    "name": "South Ruislip",
+    "lines": ["Central"],
+    "station_positions": [
+      [738, 1512]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  {
+    "name": "Ruislip Gardens",
+    "lines": ["Central"],
+    "station_positions": [
+      [738, 1265]
+    ],
+    "name_data": {
+      "anchor": "West",
+      "display_name": [
+        "Ruislip",
+        "Gardens"
+      ]
+    }
+  },
+  {
+    "name": "West Ruislip",
+    "lines": ["Central"],
+    "station_positions": [
+      [738 , 819]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
   // ===== CENTRAL LINE END =====
+
+  // ===== VICTORIA LINE START =====
+  // Walthamstow Central -> Brixton
+  {
+    "name": "Walthamstow Central",
+    "lines": ["Victoria"],
+    "station_positions": [
+      [6139, 1245]
+    ],
+    "name_data": {
+      "anchor": "East",
+      "display_name": [
+        "Walthamstow",
+        "Central"
+      ]
+    }
+  },
+  {
+    "name": "Blackhorse Road",
+    "lines": ["Victoria"],
+    "station_positions": [
+      [5876, 1245]
+    ],
+    "name_data": {
+      "anchor": "North",
+      "display_name": [
+        "Blackhorse",
+        "Road"
+      ]
+    }
+  },
+  {
+    "name": "Tottenham Hale",
+    "lines": ["Victoria"],
+    "station_positions": [
+      [5646, 1245]
+    ],
+    "name_data": {
+      "anchor": "North",
+      "display_name": [
+        "Tottenham",
+        "Hale"
+      ]
+    }
+  },
+  {
+    "name": "Seven Sisters",
+    "lines": ["Victoria"],
+    "station_positions": [
+      [5475, 1245]
+    ],
+    "name_data": {
+      "anchor": "North",
+      "display_name": [
+        "Seven",
+        "Sisters"
+      ]
+    }
+  },
+  {
+    "name": "Finsbury Park",
+    "lines": [
+      "Victoria",
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [5194, 1392],
+      [5152, 1348]
+    ],
+    "name_data": {
+      "anchor": "SouthEast",
+      "display_name": [
+        "Finsbury",
+        "Park"
+      ]
+    }
+  },
+  {
+    "name": "Highbury and Islington",
+    "lines": ["Victoria"],
+    "station_positions": [
+      [5027, 1713]
+    ],
+    "name_data": {
+      "anchor": "East",
+      "display_name": [
+        "Highbury &",
+        "Islington"
+      ]
+    }
+  },
+  {
+    "name": "King's Cross St. Pancras",
+    "lines": [
+      "Victoria",
+      "Circle",
+      "Hammersmith and City",
+      "Metropolitan",
+      "Northern",
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [4308, 2126],
+      [4308, 2193],
+      [4308, 2253]
+    ],
+    "name_data": {
+      "anchor": "North",
+      "display_name": [
+        "King's Cross",
+        "St. Pancras"
+      ]
+    }
+  },
+  {
+    "name": "Euston",
+    "lines": [
+      "Victoria",
+      "Northern"
+    ],
+    "station_positions": [
+      [4055, 2148],
+      [4137, 2148]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  {
+    "name": "Warren Street",
+    "lines": [
+      "Victoria",
+      "Northern"
+    ],
+    "station_positions": [
+      [3953, 2343]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  // Oxford circus
+  {
+    "name": "Green Park",
+    "lines": [
+      "Victoria",
+      "Piccadilly",
+      "Jubilee"
+    ],
+    "station_positions": [
+      [3432, 2972]
+    ],
+    "name_data": {
+      "anchor": "NorthEast"
+    }
+  },
+  {
+    "name": "Victoria",
+    "lines": [
+      "Victoria",
+      "Circle",
+      "District"
+    ],
+    "station_positions": [
+      [3432, 3327],
+      [3379, 3379]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  {
+    "name": "Pimlico",
+    "lines": ["Victoria"],
+    "station_positions": [
+      [3432, 3837]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  {
+    "name": "Vauxhall",
+    "lines": ["Victoria"],
+    "station_positions": [
+      [3481, 4231]
+    ],
+    "name_data": {
+      "anchor": "NorthEast"
+    }
+  },
+  {
+    "name": "Stockwell",
+    "lines": [
+      "Victoria",
+      "Northern"
+    ],
+    "station_positions": [
+      [3763, 4516]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Brixton",
+    "lines": ["Victoria"],
+    "station_positions": [
+      [3969, 4720]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  // ===== VICTORIA LINE END =====
+
+  // ===== JUBILEE LINE START =====
+  // Stratford -> Stanmore
+  // Stratford
+  {
+    "name": "West Ham",
+    "lines": [
+      "Jubilee",
+      "Hammersmith and City",
+      "District"
+    ],
+    "station_positions": [
+      [6684, 2396],
+      [6607, 2322]
+    ],
+    "name_data": {
+      "anchor": "South",
+      "display_name": [
+        "West",
+        "Ham"
+      ]
+    }
+  },
+  {
+    "name": "Canning Town",
+    "lines": ["Jubilee"],
+    "station_positions": [
+      [6609, 2991]
+    ],
+    "name_data": {
+      "anchor": "East",
+      "display_name": [
+        "Canning",
+        "Town"
+      ]
+    }
+  },
+  {
+    "name": "North Greenwich",
+    "lines": ["Jubilee"],
+    "station_positions": [
+      [6505, 3344]
+    ],
+    "name_data": {
+      "anchor": "SouthEast",
+      "display_name": [
+        "North",
+        "Greenwich"
+      ]
+    }
+  },
+  {
+    "name": "Canary Wharf",
+    "lines": ["Jubilee"],
+    "station_positions": [
+      [6119, 3387]
+    ],
+    "name_data": {
+      "anchor": "North"
+    }
+  },
+  {
+    "name": "Canada Water",
+    "lines": ["Jubilee"],
+    "station_positions": [
+      [5548, 3387]
+    ],
+    "name_data": {
+      "anchor": "South",
+      "display_name": [
+        "Canada",
+        "Water"
+      ]
+    }
+  },
+  {
+    "name": "Bermondsey",
+    "lines": ["Jubilee"],
+    "station_positions": [
+      [5193, 3387]
+    ],
+    "name_data": {
+      "anchor": "South"
+    }
+  },
+  {
+    "name": "London Bridge",
+    "lines": [
+      "Jubilee",
+      "Northern"
+    ],
+    "station_positions": [
+      [4811, 3387]
+    ],
+    "name_data": {
+      "anchor": "SouthEast",
+      "display_name": [
+        "London",
+        "Bridge"
+      ]
+    }
+  },
+  {
+    "name": "Southwark",
+    "lines": ["Jubilee"],
+    "station_positions": [
+      [4203, 3685]
+    ],
+    "name_data": {
+      "anchor": "South"
+    }
+  },
+  {
+    "name": "Waterloo",
+    "lines": [
+      "Jubilee",
+      "Northern",
+      "Bakerloo"
+    ],
+    "station_positions": [
+      [3893, 3579],
+      [3954, 3579],
+      [4013, 3579]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  {
+    "name": "Westminster",
+    "lines": [
+      "Jubilee",
+      "Circle",
+      "District"
+    ],
+    "station_positions": [
+      [3779, 3376],
+      [3779, 3315]
+    ],
+    "name_data": {
+      "anchor": "SouthWest",
+      "offset": [1.0, 0.4]
+    }
+  },
+  // Green Park
+  // Bond Street
+  {
+    "name": "Baker Street",
+    "lines": [
+      "Jubilee",
+      "Circle",
+      "Hammersmith and City",
+      "Metropolitan"
+    ],
+    "station_positions": [
+      [3391, 2251],
+      [3323, 2318]
+    ],
+    "name_data": {
+      "anchor": "NorthEast",
+      "offset": [-0.4, -0.4],
+      "display_name": [
+        "Baker",
+        "Street"
+      ]
+    }
+  },
+  {
+    "name": "St. John's Wood",
+    "lines": ["Jubilee"],
+    "station_positions": [
+      [3286, 2049]
+    ],
+    "name_data": {
+      "anchor": "NorthEast",
+      "offset": [0, 0.4]
+    }
+  },
+  {
+    "name": "Swiss Cottage",
+    "lines": ["Jubilee"],
+    "station_positions": [
+      [3212, 1975]
+    ],
+    "name_data": {
+      "anchor": "NorthEast",
+      "offset": [0, 0.4]
+    }
+  },
+  {
+    "name": "Finchley Road",
+    "lines": [
+      "Jubilee",
+      "Metropolitan"
+    ],
+    "station_positions": [
+      [3141, 1908],
+      [3100, 1951]
+    ],
+    "name_data": {
+      "anchor": "NorthEast",
+      "offset": [0, 0.4]
+    }
+  },
+  {
+    "name": "West Hampstead",
+    "lines": ["Jubilee"],
+    "station_positions": [
+      [3078, 1842]
+    ],
+    "name_data": {
+      "anchor": "NorthEast",
+      "offset": [0, 0.4],
+      "display_name": [
+        "West",
+        "Hampstead"
+      ]
+    }
+  },
+  {
+    "name": "Kilburn",
+    "lines": ["Jubilee"],
+    "station_positions": [
+      [2938, 1703]
+    ],
+    "name_data": {
+      "anchor": "NorthEast",
+      "offset": [0, 0.4]
+    }
+  },
+  {
+    "name": "Willesden Green",
+    "lines": ["Jubilee"],
+    "station_positions": [
+      [2841, 1604]
+    ],
+    "name_data": {
+      "anchor": "NorthEast",
+      "offset": [0, 0.4]
+    }
+  },
+  {
+    "name": "Dollis Hill",
+    "lines": ["Jubilee"],
+    "station_positions": [
+      [2750, 1513]
+    ],
+    "name_data": {
+      "anchor": "NorthEast",
+      "offset": [0, 0.4]
+    }
+  },
+  {
+    "name": "Neasden",
+    "lines": ["Jubilee"],
+    "station_positions": [
+      [2658, 1422]
+    ],
+    "name_data": {
+      "anchor": "NorthEast",
+      "offset": [0, 0.4]
+    }
+  },
+  {
+    "name": "Wembley Park",
+    "lines": [
+      "Jubilee",
+      "Metropolitan"
+    ],
+    "station_positions": [
+      [2524, 1376],
+      [2568, 1333]
+    ],
+    "name_data": {
+      "anchor": "SouthWest"
+    }
+  },
+  {
+    "name": "Kingsbury",
+    "lines": ["Jubilee"],
+    "station_positions": [
+      [2525, 1185]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Queensbury",
+    "lines": ["Jubilee"],
+    "station_positions": [
+      [2525, 1080]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Canons Park",
+    "lines": ["Jubilee"],
+    "station_positions": [
+      [2525, 975]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Stanmore",
+    "lines": ["Jubilee"],
+    "station_positions": [
+      [2525, 870]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  }
+  // ===== JUBILEE LINE END
 ]
