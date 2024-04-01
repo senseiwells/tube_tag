@@ -1098,11 +1098,12 @@
       "Metropolitan"
     ],
     "station_positions": [
-      [2524, 1376],
-      [2568, 1333]
+      [2568, 1333],
+      [2524, 1376]
     ],
     "name_data": {
-      "anchor": "SouthWest"
+      "anchor": "NorthEast",
+      "offset": [0, 0.4]
     }
   },
   {
@@ -1798,7 +1799,8 @@
       [2210, 3260]
     ],
     "name_data": {
-      "anchor": "NorthWest"
+      "anchor": "NorthWest",
+      "offset": [-0.4, 0.0]
     }
   },
   {
@@ -1932,7 +1934,1014 @@
     "name_data": {
       "anchor": "West"
     }
-  }
+  },
   // Ealing Broadway
   // ===== DISTRICT LINE END =====
+
+  // ===== CIRCLE LINE START =====
+  // Aldgate -> Hammersmith
+  {
+    "name": "Aldgate",
+    "lines": [
+      "Circle",
+      "Metropolitan"
+    ],
+    "station_positions": [
+      [5292, 2805]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  // Liverpool Street
+  {
+    "name": "Moorgate",
+    "lines": [
+      "Circle",
+      "Metropolitan",
+      "Hammersmith and City",
+      "Northern"
+    ],
+    "station_positions": [
+      [4812, 2612]
+    ],
+    "name_data": {
+      "anchor": "SouthWest"
+    }
+  },
+  {
+    "name": "Barbican",
+    "lines": [
+      "Circle",
+      "Metropolitan",
+      "Hammersmith and City"
+    ],
+    "station_positions": [
+      [4630, 2496]
+    ],
+    "name_data": {
+      "anchor": "SouthWest"
+    }
+  },
+  {
+    "name": "Farringdon",
+    "lines": [
+      "Circle",
+      "Metropolitan",
+      "Hammersmith and City"
+    ],
+    "station_positions": [
+      [4517, 2375]
+    ],
+    "name_data": {
+      "anchor": "SouthWest"
+    }
+  },
+  // King's Cross St. Pancras
+  {
+    "name": "Euston Square",
+    "lines": [
+      "Circle",
+      "Metropolitan",
+      "Hammersmith and City"
+    ],
+    "station_positions": [
+      [4112, 2253]
+    ],
+    "name_data": {
+      "anchor": "South",
+      "offset": [0.0, 0.5],
+      "name_lines": [
+        "Euston",
+        "Square"
+      ]
+    }
+  },
+  {
+    "name": "Great Portland Street",
+    "lines": [
+      "Circle",
+      "Metropolitan",
+      "Hammersmith and City"
+    ],
+    "station_positions": [
+      [3648, 2253]
+    ],
+    "name_data": {
+      "anchor": "North",
+      "offset": [0.0, -0.5],
+      "name_lines": [
+        "Great Portland",
+        "Street"
+      ]
+    }
+  },
+  // Edgware Road
+  // Paddington
+  {
+    "name": "Royal Oak",
+    "lines": [
+      "Circle",
+      "Hammersmith and City"
+    ],
+    "station_positions": [
+      [2325, 2362]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  {
+    "name": "Westbourne Park",
+    "lines": [
+      "Circle",
+      "Hammersmith and City"
+    ],
+    "station_positions": [
+      [2240, 2446]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  {
+    "name": "Ladbroke Grove",
+    "lines": [
+      "Circle",
+      "Hammersmith and City"
+    ],
+    "station_positions": [
+      [2211, 2576]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Latimer Road",
+    "lines": [
+      "Circle",
+      "Hammersmith and City"
+    ],
+    "station_positions": [
+      [2211, 2672]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Wood Lane",
+    "lines": [
+      "Circle",
+      "Hammersmith and City"
+    ],
+    "station_positions": [
+      [2209, 2940]
+    ],
+    "name_data": {
+      "anchor": "SouthWest"
+    }
+  },
+  {
+    "name": "Shepherd's Bush Market",
+    "lines": [
+      "Circle",
+      "Hammersmith and City"
+    ],
+    "station_positions": [
+      [2204, 3075]
+    ],
+    "name_data": {
+      "anchor": "West",
+      "name_lines": [
+        "Shepherd's",
+        "Bush Market"
+      ]
+    }
+  },
+  {
+    "name": "Goldhawk Road",
+    "lines": [
+      "Circle",
+      "Hammersmith and City"
+    ],
+    "station_positions": [
+      [2204, 3182]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  // Hammersmith
+  // ===== END OF CIRCLE LINE =====
+
+  // ===== START OF THE BAKERLOO LINE =====
+  // Elephant and Castle -> Harrow and We
+  {
+    "name": "Elephant and Castle",
+    "lines": [
+      "Bakerloo",
+      "Northern"
+    ],
+    "station_positions": [
+      [4061, 4220]
+    ],
+    "name_data": {
+      "anchor": "East",
+      "name_lines": [
+        "Elephant & Castle"
+      ]
+    }
+  },
+  {
+    "name": "Lambert North",
+    "lines": [
+      "Bakerloo"
+    ],
+    "station_positions": [
+      [4013, 3883]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  // Waterloo
+  // Embankment
+  {
+    "name": "Charing Cross",
+    "lines": [
+      "Bakerloo",
+      "Northern"
+    ],
+    "station_positions": [
+      [3955, 3153]
+    ],
+    "name_data": {
+      "anchor": "SouthWest",
+      "name_lines": [
+        "Charing",
+        "Cross"
+      ]
+    }
+  },
+  {
+    "name": "Piccadilly Circus",
+    "lines": [
+      "Bakerloo",
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [3772, 2970]
+    ],
+    "name_data": {
+      "anchor": "SouthWest",
+      "name_lines": [
+        "Piccadilly",
+        "Circus"
+      ]
+    }
+  },
+  // Oxford Circus
+  {
+    "name": "Regent's Park",
+    "lines": [
+      "Bakerloo"
+    ],
+    "station_positions": [
+      [3487, 2480]
+    ],
+    "name_data": {
+      "anchor": "NorthEast"
+    }
+  },
+  // Baker Street
+  {
+    "name": "Marylebone",
+    "lines": [
+      "Bakerloo"
+    ],
+    "station_positions": [
+      [3072, 2190]
+    ],
+    "name_data": {
+      "anchor": "North"
+    }
+  },
+  {
+    "name": "Edgware Road (Bakeloo)",
+    "lines": [
+      "Bakerloo"
+    ],
+    "station_positions": [
+      [2805, 2190]
+    ],
+    "name_data": {
+      "anchor": "North",
+      "name_lines": [
+        "Edgware Road"
+      ]
+    }
+  },
+  // Paddington
+  {
+    "name": "Warwick Avenue",
+    "lines": [
+      "Bakerloo"
+    ],
+    "station_positions": [
+      [2288, 2190]
+    ],
+    "name_data": {
+      "anchor": "South",
+      "name_lines": [
+        "Warwick",
+        "Avenue"
+      ]
+    }
+  },
+  {
+    "name": "Maida Vale",
+    "lines": [
+      "Bakerloo"
+    ],
+    "station_positions": [
+      [2184, 2164]
+    ],
+    "name_data": {
+      "anchor": "SouthWest"
+    }
+  },
+  {
+    "name": "Kilburn Park",
+    "lines": [
+      "Bakerloo"
+    ],
+    "station_positions": [
+      [2115, 2094]
+    ],
+    "name_data": {
+      "anchor": "SouthWest"
+    }
+  },
+  {
+    "name": "Queen's Park",
+    "lines": [
+      "Bakerloo"
+    ],
+    "station_positions": [
+      [2100, 1975]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Kensal Green",
+    "lines": [
+      "Bakerloo"
+    ],
+    "station_positions": [
+      [2100, 1893]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Willesden Junction",
+    "lines": [
+      "Bakerloo"
+    ],
+    "station_positions": [
+      [2100, 1805]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  {
+    "name": "Harlesdon",
+    "lines": [
+      "Bakerloo"
+    ],
+    "station_positions": [
+      [2100, 1687]
+    ],
+    "name_data": {
+      "anchor": "West",
+      "offset": [-0.4, 0.0]
+    }
+  },
+  {
+    "name": "Stonebridge Park",
+    "lines": [
+      "Bakerloo"
+    ],
+    "station_positions": [
+      [2100, 1608]
+    ],
+    "name_data": {
+      "anchor": "West",
+      "offset": [-0.4, 0.0]
+    }
+  },
+  {
+    "name": "Wembley Central",
+    "lines": [
+      "Bakerloo"
+    ],
+    "station_positions": [
+      [2100, 1530]
+    ],
+    "name_data": {
+      "anchor": "West",
+      "offset": [-0.4, 0.0]
+    }
+  },
+  {
+    "name": "North Wembley",
+    "lines": [
+      "Bakerloo"
+    ],
+    "station_positions": [
+      [2100, 1451]
+    ],
+    "name_data": {
+      "anchor": "West",
+      "offset": [-0.4, 0.0]
+    }
+  },
+  {
+    "name": "South Kenton",
+    "lines": [
+      "Bakerloo"
+    ],
+    "station_positions": [
+      [2100, 1371]
+    ],
+    "name_data": {
+      "anchor": "West",
+      "offset": [-0.4, 0.0]
+    }
+  },
+  {
+    "name": "Kenton",
+    "lines": [
+      "Bakerloo"
+    ],
+    "station_positions": [
+      [2100, 1054]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Harrow and Wealdstone",
+    "lines": [
+      "Bakerloo"
+    ],
+    "station_positions": [
+      [2100, 925]
+    ],
+    "name_data": {
+      "anchor": "West",
+      "name_lines": [
+        "Harrow &",
+        "Wealdstone"
+      ]
+    }
+  },
+  // ===== END OF THE BAKERLOO LINE ======
+
+  // ===== START OF THE PICCADILLY LINE =====
+  // Cockfosters -> Acton Town
+  {
+    "name": "Cockfosters",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [5204, 412]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  {
+    "name": "Oakwood",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [5204, 513]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  {
+    "name": "Southgate",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [5204, 616]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  {
+    "name": "Arnos Grove",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [5204, 717]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  {
+    "name": "Bounds Green",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [5204, 820]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  {
+    "name": "Wood Green",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [5204, 921]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  {
+    "name": "Turnpike Lane",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [5204, 1023]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  {
+    "name": "Manor House",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [5204, 1229]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  // Finsbury Park
+  {
+    "name": "Arsenal",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [5039, 1457]
+    ],
+    "name_data": {
+      "anchor": "NorthWest"
+    }
+  },
+  {
+    "name": "Holloway Road",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [4939, 1559]
+    ],
+    "name_data": {
+      "anchor": "NorthWest"
+    }
+  },
+  {
+    "name": "Caledonian Road",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [4803, 1700]
+    ],
+    "name_data": {
+      "anchor": "NorthWest"
+    }
+  },
+  // King's Cross St. Pancras
+  {
+    "name": "Russell Square",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [4217, 2524]
+    ],
+    "name_data": {
+      "anchor": "East",
+      "name_lines": [
+        "Russell",
+        "Square"
+      ]
+    }
+  },
+  // Holborn
+  {
+    "name": "Covent Garden",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [4053, 2806]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  {
+    "name": "Leicester Square",
+    "lines": [
+      "Piccadilly",
+      "Northern"
+    ],
+    "station_positions": [
+      [3955, 2907]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  // Piccadilly Circus
+  // Green Park
+  {
+    "name": "Hyde Park Corner",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [3331, 3061]
+    ],
+    "name_data": {
+      "anchor": "NorthWest"
+    }
+  },
+  {
+    "name": "Knightsbridge",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [3156, 3190]
+    ],
+    "name_data": {
+      "anchor": "NorthWest"
+    }
+  },
+  // South Kensington
+  // Gloucester Road
+  // Earls Court
+  // Barons Court
+  // Hammersmith
+  // Turnham Green
+  // Acton Town
+
+  // South Ealing -> Heathrow Terminal 5
+  {
+    "name": "South Ealing",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [1212, 3324]
+    ],
+    "name_data": {
+      "anchor": "North",
+      "name_lines": [
+        "South",
+        "Ealing"
+      ]
+    }
+  },
+  {
+    "name": "Northfields",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [1077, 3412]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  {
+    "name": "Boston Manor",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [997, 3491]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  {
+    "name": "Osterley",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [913, 3573]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  {
+    "name": "Hounslow East",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [849, 3640]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  {
+    "name": "Hounslow Central",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [762, 3725]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  {
+    "name": "Hounslow West",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [651, 3837]
+    ],
+    "name_data": {
+      "anchor": "SouthEast",
+      "name_lines": [
+        "Hounslow",
+        "West"
+      ]
+    }
+  },
+  {
+    "name": "Hatton Cross",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [543, 3946]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  {
+    "name": "Heathrow Terminal 4",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [426, 4255]
+    ],
+    "name_data": {
+      "anchor": "South",
+      "name_lines": [
+        "Heathrow",
+        "Terminal 4"
+      ]
+    }
+  },
+  {
+    "name": "Heathrow Terminals 2 and 3",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [427, 4063]
+    ],
+    "name_data": {
+      "anchor": "NorthWest",
+      "name_lines": [
+        "Heathrow",
+        "Terminals 2 & 3"
+      ]
+    }
+  },
+  {
+    "name": "Heathrow Terminal 5",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [182, 4306]
+    ],
+    "name_data": {
+      "anchor": "South",
+      "name_lines": [
+        "Heathrow",
+        "Terminal 5"
+      ]
+    }
+  },
+
+  // Ealing Common -> Uxbridge
+  {
+    "name": "North Ealing",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [1328, 2703]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  {
+    "name": "Park Royal",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [1328, 2570]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  {
+    "name": "Alperton",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [1328, 1966]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  {
+    "name": "Sudbury Town",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [1328, 1780]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  {
+    "name": "Sudbury Hill",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [1328, 1594]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  {
+    "name": "South Harrow",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [1328, 1412]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  {
+    "name": "Rayners Lane",
+    "lines": [
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [1201, 1187]
+    ],
+    "name_data": {
+      "anchor": "SouthWest"
+    }
+  },
+  {
+    "name": "Eastcote",
+    "lines": [
+      "Piccadilly",
+      "Metropolitan"
+    ],
+    "station_positions": [
+      [1116, 1096]
+    ],
+    "name_data": {
+      "anchor": "NorthEast"
+    }
+  },
+  {
+    "name": "Ruislip Manor",
+    "lines": [
+      "Piccadilly",
+      "Metropolitan"
+    ],
+    "station_positions": [
+      [1016, 996]
+    ],
+    "name_data": {
+      "anchor": "NorthEast"
+    }
+  },
+  {
+    "name": "Ruislip",
+    "lines": [
+      "Piccadilly",
+      "Metropolitan"
+    ],
+    "station_positions": [
+      [850, 955]
+    ],
+    "name_data": {
+      "anchor": "North"
+    }
+  },
+  {
+    "name": "Ickenham",
+    "lines": [
+      "Piccadilly",
+      "Metropolitan"
+    ],
+    "station_positions": [
+      [620, 960]
+    ],
+    "name_data": {
+      "anchor": "South"
+    }
+  },
+  {
+    "name": "Hillingdon",
+    "lines": [
+      "Piccadilly",
+      "Metropolitan"
+    ],
+    "station_positions": [
+      [486, 960]
+    ],
+    "name_data": {
+      "anchor": "North"
+    }
+  },
+  {
+    "name": "Uxbridge",
+    "lines": [
+      "Piccadilly",
+      "Metropolitan"
+    ],
+    "station_positions": [
+      [312, 960]
+    ],
+    "name_data": {
+      "anchor": "South"
+    }
+  }
 ]
