@@ -58,6 +58,8 @@ impl Application for TubeTagApp {
         let stations: Vec<Station> = serde_json::from_reader(StripComments::new(station_locations_file))
             .expect("station_locations.json5 was invalid");
 
+        println!("{:?}", stations.len());
+
         // Create a command to load the font
         let font_filepath = convert_relative_path("fonts/P22UndergroundPro-Bold.ttf");
         let load_font_command = font::load(fs::read(font_filepath).unwrap()).map(Message::FontLoaded);
@@ -186,7 +188,7 @@ impl Program<Message> for TubeTagApp {
                     let circle = Path::circle(point, coords.x_dist_pixels(32.0));
 
                     // TODO: Determine colour based on distance
-                    frame.fill(&circle, Color::from_rgb8(0, 255, 0));
+                    // frame.fill(&circle, Color::from_rgb8(0, 255, 0));
 
                     // Render station name text
                     if index == 0

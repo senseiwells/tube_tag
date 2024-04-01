@@ -800,7 +800,7 @@
       [3481, 4231]
     ],
     "name_data": {
-      "anchor": "NorthEast"
+      "anchor": "SouthWest"
     }
   },
   {
@@ -2943,5 +2943,734 @@
     "name_data": {
       "anchor": "South"
     }
+  },
+  // ===== PICCADILLY LINE END =====
+
+  // ===== METROPOLITAN LINE START =====
+  // Aldgate -> Harrow-on-the-Hill
+  {
+    "name": "Preston Road",
+    "lines": [
+      "Metropolitan"
+    ],
+    "station_positions": [
+      [2250, 1220]
+    ],
+    "name_data": {
+      "anchor": "North",
+      "name_lines": [
+        "Preston",
+        "Road"
+      ]
+    }
+  },
+  {
+    "name": "Northwick Park",
+    "lines": [
+      "Metropolitan"
+    ],
+    "station_positions": [
+      [1960, 1220]
+    ],
+    "name_data": {
+      "anchor": "South",
+      "name_lines": [
+        "Northwick",
+        "Park"
+      ]
+    }
+  },
+  {
+    "name": "Harrow-on-the-Hill",
+    "lines": [
+      "Metropolitan"
+    ],
+    "station_positions": [
+      [1730, 1220]
+    ],
+    "name_data": {
+      "anchor": "North",
+      "name_lines": [
+        "Harrow-",
+        "on-the-Hill"
+      ]
+    }
+  },
+
+  // West Harrow -> Uxbridge
+  {
+    "name": "West Harrow",
+    "lines": [
+      "Metropolitan"
+    ],
+    "station_positions": [
+      [1503, 1220]
+    ],
+    "name_data": {
+      "anchor": "South",
+      "name_lines": [
+        "West",
+        "Harrow"
+      ]
+    }
+  },
+
+  // North Harrow -> Moor Park
+  {
+    "name": "North Harrow",
+    "lines": [
+      "Metropolitan"
+    ],
+    "station_positions": [
+      [1490, 1068]
+    ],
+    "name_data": {
+      "anchor": "NorthEast"
+    }
+  },
+  {
+    "name": "Pinner",
+    "lines": [
+      "Metropolitan"
+    ],
+    "station_positions": [
+      [1410, 987]
+    ],
+    "name_data": {
+      "anchor": "NorthEast"
+    }
+  },
+  {
+    "name": "Northwood Hills",
+    "lines": [
+      "Metropolitan"
+    ],
+    "station_positions": [
+      [1310, 886]
+    ],
+    "name_data": {
+      "anchor": "NorthEast"
+    }
+  },
+  {
+    "name": "Northwood",
+    "lines": [
+      "Metropolitan"
+    ],
+    "station_positions": [
+      [1216, 793]
+    ],
+    "name_data": {
+      "anchor": "NorthEast"
+    }
+  },
+  {
+    "name": "Moor Park",
+    "lines": [
+      "Metropolitan"
+    ],
+    "station_positions": [
+      [1124, 702]
+    ],
+    "name_data": {
+      "anchor": "NorthEast"
+    }
+  },
+
+  // Croxley -> Watford
+  {
+    "name": "Croxley",
+    "lines": [
+      "Metropolitan"
+    ],
+    "station_positions": [
+      [1070, 518]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Watford",
+    "lines": [
+      "Metropolitan"
+    ],
+    "station_positions": [
+      [1070, 393]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+
+  // Rickmansworth -> Amersham / Chesham
+  {
+    "name": "Rickmansworth",
+    "lines": [
+      "Metropolitan"
+    ],
+    "station_positions": [
+      [990, 570]
+    ],
+    "name_data": {
+      "anchor": "SouthWest"
+    }
+  },
+  {
+    "name": "Chorleywood",
+    "lines": [
+      "Metropolitan"
+    ],
+    "station_positions": [
+      [870, 450]
+    ],
+    "name_data": {
+      "anchor": "SouthWest"
+    }
+  },
+  {
+    "name": "Chalfont and Latimer",
+    "lines": [
+      "Metropolitan"
+    ],
+    "station_positions": [
+      [590, 360]
+    ],
+    "name_data": {
+      "anchor": "North",
+      "name_lines": [
+        "Chalfont &",
+        "Latimer"
+      ]
+    }
+  },
+  {
+    "name": "Amersham",
+    "lines": [
+      "Metropolitan"
+    ],
+    "station_positions": [
+      [122, 362]
+    ],
+    "name_data": {
+      "anchor": "South"
+    }
+  },
+  {
+    "name": "Chesham",
+    "lines": [
+      "Metropolitan"
+    ],
+    "station_positions": [
+      [290, 262]
+    ],
+    "name_data": {
+      "anchor": "NorthWest"
+    }
+  },
+  // ===== METROPOLITAN LINE END =====
+
+  // ===== NORTHERN LINE START =====
+  // Morden -> Kennington
+  {
+    "name": "Morden",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [2864, 5416]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  {
+    "name": "South Wimbledon",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [3097, 5183]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  {
+    "name": "Colliers Wood",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [3173, 5107]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  {
+    "name": "Tooting Broadway",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [3250, 5030]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  {
+    "name": "Tooting Bec",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [3324, 4956]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  {
+    "name": "Balham",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [3385, 4894]
+    ],
+    "name_data": {
+      "anchor": "NorthWest"
+    }
+  },
+  {
+    "name": "Clapham South",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [3470, 4809]
+    ],
+    "name_data": {
+      "anchor": "NorthWest"
+    }
+  },
+  {
+    "name": "Clapham Common",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [3542, 4734]
+    ],
+    "name_data": {
+      "anchor": "NorthWest"
+    }
+  },
+  {
+    "name": "Clapham North",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [3643, 4636]
+    ],
+    "name_data": {
+      "anchor": "NorthWest"
+    }
+  },
+  // Stockwell
+  {
+    "name": "Oval",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [3871, 4408]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  {
+    "name": "Kennington",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [3937, 4343]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  // Nine Elms -> Battersea Power Station
+  {
+    "name": "Nine Elms",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [3251, 4148]
+    ],
+    "name_data": {
+      "anchor": "South",
+      "name_lines": [
+        "Nine",
+        "Elms"
+      ]
+    }
+  },
+  {
+    "name": "Battersea Power Station",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [3063, 4148]
+    ],
+    "name_data": {
+      "anchor": "South",
+      "offset": [0.0, 0.5],
+      "name_lines": [
+        "Battersea",
+        "Power",
+        "Station"
+      ]
+    }
+  },
+  // Waterloo -> Mornington Crescent
+  {
+    "name": "Goodge Street",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [3955, 2524]
+    ],
+    "name_data": {
+      "anchor": "East",
+      "name_lines": [
+        "Goodge",
+        "Street"
+      ]
+    }
+  },
+  {
+    "name": "Mornington Crescent",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [4055, 1966]
+    ],
+    "name_data": {
+      "anchor": "West",
+      "name_lines": [
+        "Mornington",
+        "Crescent"
+      ]
+    }
+  },
+  // Elephant and Castle -> Camden Town
+  {
+    "name": "Borough",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [4481, 3799]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  // London Bridge
+  // Bank
+  // Moorgate
+  {
+    "name": "Old Street",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [4811, 2299]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Angel",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [4592, 2191]
+    ],
+    "name_data": {
+      "anchor": "South"
+    }
+  },
+  // King's Cross St. Pancras
+  {
+    "name": "Camden Town",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [4096, 1828]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  // Chalk Farm -> Edgware
+  {
+    "name": "Chalk Farm",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [4013, 1687]
+    ],
+    "name_data": {
+      "anchor": "SouthWest"
+    }
+  },
+  {
+    "name": "Belsize Park",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [3900, 1572]
+    ],
+    "name_data": {
+      "anchor": "SouthWest"
+    }
+  },
+  {
+    "name": "Hamstead",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [3696, 1371]
+    ],
+    "name_data": {
+      "anchor": "SouthWest"
+    }
+  },
+  {
+    "name": "Golders Green",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [3605, 1276]
+    ],
+    "name_data": {
+      "anchor": "SouthWest"
+    }
+  },
+  {
+    "name": "Brent Cross",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [3517, 1190]
+    ],
+    "name_data": {
+      "anchor": "SouthWest"
+    }
+  },
+  {
+    "name": "Hendon Central",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [3414, 1085]
+    ],
+    "name_data": {
+      "anchor": "SouthWest"
+    }
+  },
+  {
+    "name": "Colindale",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [3329, 1003]
+    ],
+    "name_data": {
+      "anchor": "SouthWest"
+    }
+  },
+  {
+    "name": "Burnt Oak",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [3235, 909]
+    ],
+    "name_data": {
+      "anchor": "SouthWest"
+    }
+  },
+  {
+    "name": "Edgware",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [3093, 764]
+    ],
+    "name_data": {
+      "anchor": "SouthWest"
+    }
+  },
+  // Kentish Town -> High Barnet
+  {
+    "name": "Kentish Town",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [4325, 1541]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  {
+    "name": "Tufnell Park",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [4370, 1443]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Archway",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [4369, 1228]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Highgate",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [4369, 1120]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "East Finchley",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [4370, 1011]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Finchley Central",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [4370, 897]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "West Finchley",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [4370, 720]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Woodside Park",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [4370, 623]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Totteridge and Whetstone",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [4370, 521]
+    ],
+    "name_data": {
+      "anchor": "East",
+      "name_lines": [
+        "Totteridge & Whetstone"
+      ]
+    }
+  },
+  {
+    "name": "High Barnet",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [4370, 418]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  // Mill Hill East
+  {
+    "name": "Mill Hill East",
+    "lines": [
+      "Northern"
+    ],
+    "station_positions": [
+      [4229, 682]
+    ],
+    "name_data": {
+      "anchor": "SouthWest"
+    }
   }
+  // ===== NORTHERN LINE END =====
 ]
