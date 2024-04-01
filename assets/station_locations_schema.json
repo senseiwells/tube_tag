@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Tube Station Locations Schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string"
+      },
+      "lines": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "Central",
+            "Piccadilly",
+            "Circle",
+            "Jubilee",
+            "District",
+            "Hammersmith and City",
+            "Waterloo and City",
+            "Metropolitan",
+            "Northern",
+            "Bakerloo",
+            "Victoria"
+          ]
+        }
+      },
+      "station_positions": {
+        "type": "array",
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        }
+      },
+      "name_data": {
+        "type": "object",
+        "properties": {
+          "anchor": {
+            "type": "string",
+            "enum": [
+              "North",
+              "NorthEast",
+              "East",
+              "SouthEast",
+              "South",
+              "SouthWest",
+              "West",
+              "NorthWest"
+            ]
+          },
+          "name_lines": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "offset": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          }
+        },
+        "required": [
+          "anchor"
+        ]
+      }
+    },
+    "required": [
+      "name",
+      "lines",
+      "station_positions",
+      "name_data"
+    ]
+  }
+}

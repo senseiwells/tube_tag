@@ -397,7 +397,7 @@
     ],
     "name_data": {
       "anchor": "SouthEast",
-      "display_name": [
+      "name_lines": [
         "Lancaster",
         "Gate"
       ]
@@ -426,7 +426,7 @@
     "name_data": {
       "anchor": "NorthEast",
       "offset": [0.4, 0],
-      "display_name": [
+      "name_lines": [
         "Notting",
         "Hill Gate"
       ]
@@ -440,7 +440,7 @@
     ],
     "name_data": {
       "anchor": "South",
-      "display_name": [
+      "name_lines": [
         "Holland",
         "Park"
       ]
@@ -454,7 +454,7 @@
     ],
     "name_data": {
       "anchor": "North",
-      "display_name": [
+      "name_lines": [
         "Shepherd's",
         "Bush"
       ]
@@ -468,7 +468,7 @@
     ],
     "name_data": {
       "anchor": "North",
-      "display_name": [
+      "name_lines": [
         "White",
         "City"
       ]
@@ -482,7 +482,7 @@
     ],
     "name_data": {
       "anchor": "North",
-      "display_name": [
+      "name_lines": [
         "East",
         "Acton"
       ]
@@ -496,7 +496,7 @@
     ],
     "name_data": {
       "anchor": "South",
-      "display_name": [
+      "name_lines": [
         "North",
         "Acton"
       ]
@@ -512,7 +512,7 @@
     ],
     "name_data": {
       "anchor": "South",
-      "display_name": [
+      "name_lines": [
         "West",
         "Acton"
       ]
@@ -529,7 +529,7 @@
     ],
     "name_data": {
       "anchor": "West",
-      "display_name": [
+      "name_lines": [
         "Ealing",
         "Broadway"
       ]
@@ -595,7 +595,7 @@
     ],
     "name_data": {
       "anchor": "West",
-      "display_name": [
+      "name_lines": [
         "Ruislip",
         "Gardens"
       ]
@@ -623,7 +623,7 @@
     ],
     "name_data": {
       "anchor": "East",
-      "display_name": [
+      "name_lines": [
         "Walthamstow",
         "Central"
       ]
@@ -637,7 +637,7 @@
     ],
     "name_data": {
       "anchor": "North",
-      "display_name": [
+      "name_lines": [
         "Blackhorse",
         "Road"
       ]
@@ -651,7 +651,7 @@
     ],
     "name_data": {
       "anchor": "North",
-      "display_name": [
+      "name_lines": [
         "Tottenham",
         "Hale"
       ]
@@ -665,7 +665,7 @@
     ],
     "name_data": {
       "anchor": "North",
-      "display_name": [
+      "name_lines": [
         "Seven",
         "Sisters"
       ]
@@ -683,7 +683,7 @@
     ],
     "name_data": {
       "anchor": "SouthEast",
-      "display_name": [
+      "name_lines": [
         "Finsbury",
         "Park"
       ]
@@ -697,7 +697,7 @@
     ],
     "name_data": {
       "anchor": "East",
-      "display_name": [
+      "name_lines": [
         "Highbury &",
         "Islington"
       ]
@@ -720,7 +720,7 @@
     ],
     "name_data": {
       "anchor": "North",
-      "display_name": [
+      "name_lines": [
         "King's Cross",
         "St. Pancras"
       ]
@@ -844,7 +844,7 @@
     ],
     "name_data": {
       "anchor": "South",
-      "display_name": [
+      "name_lines": [
         "West",
         "Ham"
       ]
@@ -858,7 +858,7 @@
     ],
     "name_data": {
       "anchor": "East",
-      "display_name": [
+      "name_lines": [
         "Canning",
         "Town"
       ]
@@ -872,7 +872,7 @@
     ],
     "name_data": {
       "anchor": "SouthEast",
-      "display_name": [
+      "name_lines": [
         "North",
         "Greenwich"
       ]
@@ -896,7 +896,7 @@
     ],
     "name_data": {
       "anchor": "South",
-      "display_name": [
+      "name_lines": [
         "Canada",
         "Water"
       ]
@@ -923,7 +923,7 @@
     ],
     "name_data": {
       "anchor": "SouthEast",
-      "display_name": [
+      "name_lines": [
         "London",
         "Bridge"
       ]
@@ -944,7 +944,8 @@
     "lines": [
       "Jubilee",
       "Northern",
-      "Bakerloo"
+      "Bakerloo",
+      "Waterloo and City"
     ],
     "station_positions": [
       [3893, 3579],
@@ -988,7 +989,7 @@
     "name_data": {
       "anchor": "NorthEast",
       "offset": [-0.4, -0.4],
-      "display_name": [
+      "name_lines": [
         "Baker",
         "Street"
       ]
@@ -1040,7 +1041,7 @@
     "name_data": {
       "anchor": "NorthEast",
       "offset": [0, 0.4],
-      "display_name": [
+      "name_lines": [
         "West",
         "Hampstead"
       ]
@@ -1143,6 +1144,795 @@
     "name_data": {
       "anchor": "East"
     }
+  },
+  // ===== JUBILEE LINE END =====
+
+  // ===== DISTRICT LINE START =====
+  // Upminster -> Earl's Court
+  {
+    "name": "Upminster",
+    "lines": [
+      "District"
+    ],
+    "station_positions": [
+      [7902, 1303]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  {
+    "name": "Upminster Bridge",
+    "lines": [
+      "District"
+    ],
+    "station_positions": [
+      [7809, 1396]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+{
+    "name": "Hornchurch",
+    "lines": [
+      "District"
+    ],
+    "station_positions": [
+      [7724, 1482]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  {
+    "name": "Elm Park",
+    "lines": [
+      "District"
+    ],
+    "station_positions": [
+      [7649, 1555]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  {
+    "name": "Dagenham East",
+    "lines": [
+      "District"
+    ],
+    "station_positions": [
+      [7516, 1690]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  {
+    "name": "Dagenham Heathway",
+    "lines": [
+      "District"
+    ],
+    "station_positions": [
+      [7412, 1792]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  {
+    "name": "Becontree",
+    "lines": [
+      "District"
+    ],
+    "station_positions": [
+      [7322, 1882]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  {
+    "name": "Upney",
+    "lines": [
+      "District"
+    ],
+    "station_positions": [
+      [7243, 1961]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  {
+    "name": "Barking",
+    "lines": [
+      "District",
+      "Hammersmith and City"
+    ],
+    "station_positions": [
+      [7149, 2044]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  {
+    "name": "East Ham",
+    "lines": [
+      "District",
+      "Hammersmith and City"
+    ],
+    "station_positions": [
+      [7060, 2128]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  {
+    "name": "Upton Park",
+    "lines": [
+      "District",
+      "Hammersmith and City"
+    ],
+    "station_positions": [
+      [6957, 2232]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  {
+    "name": "Plaistow",
+    "lines": [
+      "District",
+      "Hammersmith and City"
+    ],
+    "station_positions": [
+      [6847, 2344]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  // West Ham
+  {
+    "name": "Bromley-by-Bow",
+    "lines": [
+      "District",
+      "Hammersmith and City"
+    ],
+    "station_positions": [
+      [6497, 2396]
+    ],
+    "name_data": {
+      "anchor": "South",
+      "name_lines": [
+        "Bromley-",
+        "by-Bow"
+      ]
+    }
+  },
+  {
+    "name": "Bow Road",
+    "lines": [
+      "District",
+      "Hammersmith and City"
+    ],
+    "station_positions": [
+      [6258, 2391]
+    ],
+    "name_data": {
+      "anchor": "North",
+      "name_lines": [
+        "Bow",
+        "Road"
+      ]
+    }
+  },
+  // Mile End
+  {
+    "name": "Stepney Green",
+    "lines": [
+      "District",
+      "Hammersmith and City"
+    ],
+    "station_positions": [
+      [5713, 2424]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  {
+    "name": "Whitechapel",
+    "lines": [
+      "District",
+      "Hammersmith and City"
+    ],
+    "station_positions": [
+      [5550, 2587]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  {
+    "name": "Aldgate East",
+    "lines": [
+      "District",
+      "Hammersmith and City"
+    ],
+    "station_positions": [
+      [5472, 2666]
+    ],
+    "name_data": {
+      "anchor": "NorthWest",
+      "name_lines": [
+        "Aldgate",
+        "East"
+      ]
+    }
+  },
+  {
+    "name": "Tower Hill",
+    "lines": [
+      "District",
+      "Circle"
+    ],
+    "station_positions": [
+      [5208, 3007]
+    ],
+    "name_data": {
+      "anchor": "South",
+      "name_lines": [
+        "Tower",
+        "Hill"
+      ]
+    }
+  },
+  {
+    "name": "Monument",
+    "lines": [
+      "District",
+      "Circle"
+    ],
+    "station_positions": [
+      [4874, 3008]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  {
+    "name": "Cannon Street",
+    "lines": [
+      "District",
+      "Circle"
+    ],
+    "station_positions": [
+      [4642, 3081]
+    ],
+    "name_data": {
+      "anchor": "NorthWest"
+    }
+  },
+  {
+    "name": "Mansion House",
+    "lines": [
+      "District",
+      "Circle"
+    ],
+    "station_positions": [
+      [4546, 3170]
+    ],
+    "name_data": {
+      "anchor": "NorthWest"
+    }
+  },
+  {
+    "name": "Blackfriars",
+    "lines": [
+      "District",
+      "Circle"
+    ],
+    "station_positions": [
+      [4462, 3263]
+    ],
+    "name_data": {
+      "anchor": "NorthWest"
+    }
+  },
+  {
+    "name": "Temple",
+    "lines": [
+      "District",
+      "Circle"
+    ],
+    "station_positions": [
+      [4260, 3373]
+    ],
+    "name_data": {
+      "anchor": "North"
+    }
+  },
+  {
+    "name": "Embankment",
+    "lines": [
+      "District",
+      "Circle",
+      "Bakerloo",
+      "Northern"
+    ],
+    "station_positions": [
+      [4012, 3377],
+      [3954, 3318]
+    ],
+    "name_data": {
+      "anchor": "SouthEast"
+    }
+  },
+  // Westminster
+  {
+    "name": "St. James's Park",
+    "lines": [
+      "District",
+      "Circle"
+    ],
+    "station_positions": [
+      [3565, 3373]
+    ],
+    "name_data": {
+      "anchor": "North",
+      "name_lines": [
+        "St. James's",
+        "Park"
+      ]
+    }
+  },
+  // Victoria
+  {
+    "name": "Sloane Square",
+    "lines": [
+      "District",
+      "Circle"
+    ],
+    "station_positions": [
+      [3206, 3382]
+    ],
+    "name_data": {
+      "anchor": "South",
+        "name_lines": [
+          "Sloane",
+          "Square"
+        ]
+    }
+  },
+  {
+    "name": "South Kensington",
+    "lines": [
+      "District",
+      "Circle",
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [2968, 3387],
+      [2968, 3326]
+    ],
+    "name_data": {
+      "anchor": "South",
+        "name_lines": [
+          "South",
+          "Kensington"
+        ]
+    }
+  },
+  {
+    "name": "Gloucester Road",
+    "lines": [
+      "District",
+      "Circle",
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [2845, 3322],
+      [2845, 3371]
+    ],
+    "name_data": {
+      "anchor": "North",
+        "name_lines": [
+          "Gloucester",
+          "Road"
+        ]
+    }
+  },
+  {
+    "name": "Earl's Court",
+    "lines": [
+      "District",
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [2633, 3387],
+      [2633, 3325]
+    ],
+    "name_data": {
+      "anchor": "South",
+      "offset": [0.5, 0.0],
+      "name_lines": [
+        "Earl's",
+        "Court"
+      ]
+    }
+  },
+
+  // Kensington (Olympia)
+  {
+    "name": "Kensington (Olympia)",
+    "lines": [
+      "District"
+    ],
+    "station_positions": [
+      [2583, 3123]
+    ],
+    "name_data": {
+      "anchor": "West",
+      "name_lines": [
+        "Kensington",
+        "(Olympia)"
+      ]
+    }
+  },
+
+  // High Street Kensington -> Edgware Road
+  {
+    "name": "High Street Kensington",
+    "lines": [
+      "District",
+      "Circle"
+    ],
+    "station_positions": [
+      [2696, 3067]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  // Notting Hill Gate
+  {
+    "name": "Bayswater",
+    "lines": [
+      "District",
+      "Circle"
+    ],
+    "station_positions": [
+      [2696, 2569]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Paddington",
+    "lines": [
+      "District",
+      "Circle",
+      "Hammersmith and City",
+      "Bakerloo"
+    ],
+    "station_positions": [
+      [2584, 2190],
+      [2642, 2244],
+      [2716, 2321]
+    ],
+    "name_data": {
+      "anchor": "NorthWest"
+    }
+  },
+  {
+    "name": "Edgware Road (Circle)",
+    "lines": [
+      "District",
+      "Circle",
+      "Hammersmith and City"
+    ],
+    "station_positions": [
+      [2926, 2295],
+      [2927, 2244]
+    ],
+    "name_data": {
+      "anchor": "South",
+      "name_lines": [
+        "Edgware",
+        "Road"
+      ]
+    }
+  },
+
+  // West Brompton -> Wimbledon
+  {
+    "name": "West Brompton",
+    "lines": [
+      "District"
+    ],
+    "station_positions": [
+      [2582, 3635]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  {
+    "name": "Fulham Broadway",
+    "lines": [
+      "District"
+    ],
+    "station_positions": [
+      [2582, 3866]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  {
+    "name": "Parsons Green",
+    "lines": [
+      "District"
+    ],
+    "station_positions": [
+      [2582, 3951]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  {
+    "name": "Putney Bridge",
+    "lines": [
+      "District"
+    ],
+    "station_positions": [
+      [2582, 4037]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  {
+    "name": "East Putney",
+    "lines": [
+      "District"
+    ],
+    "station_positions": [
+      [2582, 4172]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  {
+    "name": "Southfields",
+    "lines": [
+      "District"
+    ],
+    "station_positions": [
+      [2582, 4268]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  {
+    "name": "Wimbledon Park",
+    "lines": [
+      "District"
+    ],
+    "station_positions": [
+      [2582, 4362]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+  {
+    "name": "Wimbledon",
+    "lines": [
+      "District"
+    ],
+    "station_positions": [
+      [2582, 4459 ]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
+  },
+
+  // West Kensington -> Turnham Green
+  {
+    "name": "West Kensington",
+    "lines": [
+      "District"
+    ],
+    "station_positions": [
+      [2476, 3387]
+    ],
+    "name_data": {
+      "anchor": "South",
+      "name_lines": [
+        "West",
+        "Kensington"
+      ]
+    }
+  },
+  {
+    "name": "Barons Court",
+    "lines": [
+      "District",
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [2337, 3327],
+      [2337, 3387]
+    ],
+    "name_data": {
+      "anchor": "North",
+      "name_lines": [
+        "Barons",
+        "Court"
+      ]
+    }
+  },
+  {
+    "name": "Hammersmith",
+    "lines": [
+      "District",
+      "Piccadilly",
+      "Circle",
+      "Hammersmith and City"
+    ],
+    "station_positions": [
+      [2210, 3326],
+      [2210, 3387],
+      [2210, 3260]
+    ],
+    "name_data": {
+      "anchor": "NorthWest"
+    }
+  },
+  {
+    "name": "Ravenscourt Park",
+    "lines": [
+      "District"
+    ],
+    "station_positions": [
+      [2053, 3387]
+    ],
+    "name_data": {
+      "anchor": "South",
+      "name_lines": [
+        "Ravenscourt",
+        "Park"
+      ]
+    }
+  },
+  {
+    "name": "Stamford Brook",
+    "lines": [
+      "District"
+    ],
+    "station_positions": [
+      [1837, 3387]
+    ],
+    "name_data": {
+      "anchor": "South",
+      "name_lines": [
+        "Stanford",
+        "Brook"
+      ]
+    }
+  },
+  {
+    "name": "Turnham Green",
+    "lines": [
+      "District",
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [1647, 3387],
+      [1647, 3327]
+    ],
+    "name_data": {
+      "anchor": "South",
+      "name_lines": [
+        "Turnham",
+        "Green"
+      ]
+    }
+  },
+
+  // Gunnersbury -> Richmond
+  {
+    "name": "Gunnersbury",
+    "lines": [
+      "District"
+    ],
+    "station_positions": [
+      [1535, 3595]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Kew Gardens",
+    "lines": [
+      "District"
+    ],
+    "station_positions": [
+      [1535, 3829]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+  {
+    "name": "Richmond",
+    "lines": [
+      "District"
+    ],
+    "station_positions": [
+      [1535, 3949]
+    ],
+    "name_data": {
+      "anchor": "East"
+    }
+  },
+
+  // Chiswick Park -> Ealing Broadway
+  {
+    "name": "Chiswick Park",
+    "lines": [
+      "District"
+    ],
+    "station_positions": [
+      [1488, 3387]
+    ],
+    "name_data": {
+      "anchor": "SouthWest",
+      "name_lines": [
+        "Chiswick",
+        "Park"
+      ]
+    }
+  },
+  {
+    "name": "Acton Town",
+    "lines": [
+      "District",
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [1366, 3325]
+    ],
+    "name_data": {
+      "anchor": "NorthEast"
+    }
+  },
+  {
+    "name": "Ealing Common",
+    "lines": [
+      "District",
+      "Piccadilly"
+    ],
+    "station_positions": [
+      [1319, 3119]
+    ],
+    "name_data": {
+      "anchor": "West"
+    }
   }
-  // ===== JUBILEE LINE END
+  // Ealing Broadway
+  // ===== DISTRICT LINE END =====
 ]
