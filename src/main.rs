@@ -2,6 +2,7 @@ mod render_overlay;
 mod stations;
 mod coordinate_system;
 mod resource_util;
+mod searching;
 
 use std::fs;
 use std::fs::File;
@@ -18,6 +19,7 @@ use crate::render_overlay::RenderOverlay;
 use crate::stations::Station;
 use crate::coordinate_system::CoordinateSystem;
 use crate::resource_util::convert_relative_path;
+use crate::searching::levenshtein_distance;
 
 pub fn main() -> iced::Result {
     let mut settings = Settings::default();
@@ -29,7 +31,7 @@ pub fn main() -> iced::Result {
 struct TubeTagApp {
     // Backend
     all_stations: Vec<Station>,
-    guessed_stations: Vec<Station>,
+    guessed_stations: Vec<usize>,
     target_station: Option<Station>,
 
     // Frontend
@@ -87,10 +89,7 @@ impl Application for TubeTagApp {
                 self.station_input = input
             }
             Message::GuessSubmitted => {
-                // TODO: Check that it's a valid tube station
-                //  If it is and the user has not guessed it we
-                //  reset the current guess, otherwise nothing
-                self.station_input = "".to_string()
+                self.guess_submitted()
             }
             _ => { }
         }
@@ -134,6 +133,41 @@ impl Application for TubeTagApp {
     }
 }
 
+impl TubeTagApp {
+    fn search_approx(&self, query : &str) -> Option<usize>{
+        // Find station with smallest Levenshtein distance
+        let mut closest_match = 0;
+        let mut closest_dist = levenshtein_distance(query, &self.all_stations[0].name);
+        for idx in 1..self.all_stations.len() {
+            let station_name = &self.all_stations[idx].name;
+            let distance = levenshtein_distance(query, station_name);
+
+            if distance < closest_dist {
+                closest_match = idx;
+                closest_dist = distance;
+            }
+        }
+
+        // If distance is small, return found
+        return if (closest_dist <= 2) { Some(closest_match) } else { None }
+    }
+
+    fn guess_submitted(&mut self) {
+        let station_idx = self.search_approx(&self.station_input);
+
+        // Input was not a valid station
+        if station_idx.is_none() {
+            // TODO: Some sort of user feedback for "Station doesn't exist"
+            return;
+        }
+
+        // Station is valid
+        self.guessed_stations.push(station_idx.unwrap());
+        self.station_input = String::new();
+    }
+}
+
+
 #[derive(Debug, Clone, Copy)]
 pub struct PubState {
     pub scale: f32,
@@ -176,7 +210,8 @@ impl Program<Message> for TubeTagApp {
 
             let coords = CoordinateSystem::new(frame.width(), frame.height(), exposed_state.scale);
 
-            for station in &self.all_stations {
+            for station_idx in &self.guessed_stations {
+                let station = &self.all_stations[station_idx.clone()];
                 for (index, offsets) in station.station_positions.iter().enumerate() {
                     let relative_x = offsets.0 * CoordinateSystem::REL_X;
                     let relative_y = offsets.1 * CoordinateSystem::REL_Y;
