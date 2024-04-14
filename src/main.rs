@@ -2,7 +2,6 @@ mod render_overlay;
 mod stations;
 mod coordinate_system;
 mod resource_util;
-mod searching;
 
 use std::fs;
 use std::fs::File;
@@ -15,11 +14,11 @@ use iced::mouse::Cursor;
 use iced::widget::canvas::{Cache, Geometry, Path, Program};
 use iced::widget::image::viewer;
 use json_comments::StripComments;
+use simsearch::{SearchOptions, SimSearch};
 use crate::render_overlay::RenderOverlay;
 use crate::stations::Station;
 use crate::coordinate_system::CoordinateSystem;
 use crate::resource_util::convert_relative_path;
-use crate::searching::levenshtein_distance;
 
 pub fn main() -> iced::Result {
     let mut settings = Settings::default();
@@ -33,6 +32,7 @@ struct TubeTagApp {
     all_stations: Vec<Station>,
     guessed_stations: Vec<usize>,
     target_station: Option<Station>,
+    search_engine: SimSearch<usize>,
 
     // Frontend
     station_input: String,
@@ -60,7 +60,11 @@ impl Application for TubeTagApp {
         let stations: Vec<Station> = serde_json::from_reader(StripComments::new(station_locations_file))
             .expect("station_locations.json5 was invalid");
 
-        println!("{:?}", stations.len());
+        // Initialize search engine
+        let mut search_engine = SimSearch::new_with(SearchOptions::new().threshold(0.9));
+        for station_idx in 0..stations.len() {
+            search_engine.insert(station_idx, &stations[station_idx].name);
+        }
 
         // Create a command to load the font
         let font_filepath = convert_relative_path("fonts/P22UndergroundPro-Bold.ttf");
@@ -71,6 +75,7 @@ impl Application for TubeTagApp {
             all_stations: stations,
             guessed_stations: Vec::new(),
             target_station: None,
+            search_engine,
             station_input: String::new(),
             render_cache: Cache::new()
         };
@@ -135,21 +140,11 @@ impl Application for TubeTagApp {
 
 impl TubeTagApp {
     fn search_approx(&self, query : &str) -> Option<usize>{
-        // Find station with smallest Levenshtein distance
-        let mut closest_match = 0;
-        let mut closest_dist = levenshtein_distance(query, &self.all_stations[0].name);
-        for idx in 1..self.all_stations.len() {
-            let station_name = &self.all_stations[idx].name;
-            let distance = levenshtein_distance(query, station_name);
-
-            if distance < closest_dist {
-                closest_match = idx;
-                closest_dist = distance;
-            }
-        }
+        // Search with search engine
+        let results: Vec<usize> = self.search_engine.search(query);
 
         // If distance is small, return found
-        return if (closest_dist <= 2) { Some(closest_match) } else { None }
+        return if (results.len() > 0) { Some(results[0]) } else { None }
     }
 
     fn guess_submitted(&mut self) {
