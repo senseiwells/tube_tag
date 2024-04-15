@@ -3,11 +3,12 @@ mod stations;
 mod coordinate_system;
 mod resource_util;
 
+use std::collections::HashSet;
 use std::fs;
 use std::fs::File;
 use std::ops::{Add};
 use iced::{Color, executor, Font, font, Point, Rectangle, Renderer, Vector};
-use iced::widget::{container, row, image, text_input, Column, canvas};
+use iced::widget::{container, row, image, text_input, Column, canvas, button};
 use iced::{Application, Command, Element, Length, Settings, Theme};
 use iced::font::{Family, Weight};
 use iced::mouse::Cursor;
@@ -15,6 +16,7 @@ use iced::widget::canvas::{Cache, Geometry, Path, Program};
 use iced::widget::image::viewer;
 use json_comments::StripComments;
 use simsearch::{SearchOptions, SimSearch};
+use regex::Regex;
 use crate::render_overlay::RenderOverlay;
 use crate::stations::Station;
 use crate::coordinate_system::CoordinateSystem;
@@ -30,7 +32,7 @@ pub fn main() -> iced::Result {
 struct TubeTagApp {
     // Backend
     all_stations: Vec<Station>,
-    guessed_stations: Vec<usize>,
+    guessed_stations: HashSet<usize>,
     target_station: Option<Station>,
     search_engine: SimSearch<usize>,
 
@@ -43,7 +45,8 @@ struct TubeTagApp {
 enum Message {
     FontLoaded(Result<(), font::Error>),
     GuessInputChanged(String),
-    GuessSubmitted
+    GuessSubmitted,
+    ClearGuesses
 }
 
 impl Application for TubeTagApp {
@@ -61,9 +64,18 @@ impl Application for TubeTagApp {
             .expect("station_locations.json5 was invalid");
 
         // Initialize search engine
-        let mut search_engine = SimSearch::new_with(SearchOptions::new().threshold(0.9));
+        let mut search_engine = SimSearch::new_with(
+            SearchOptions::new().threshold(0.75).stop_whitespace(false).levenshtein(true)
+        );
+        let regex = Regex::new(r"\((.*?)\)").unwrap();
         for station_idx in 0..stations.len() {
-            search_engine.insert(station_idx, &stations[station_idx].name);
+            let name = &stations[station_idx].name;
+            if regex.is_match(name) {
+                // We insert the name without brackets too
+                search_engine.insert_tokens(station_idx, &[name, &regex.replace_all(name, "")]);
+            } else {
+                search_engine.insert(station_idx, name);
+            }
         }
 
         // Create a command to load the font
@@ -73,7 +85,7 @@ impl Application for TubeTagApp {
         // Construct a TubeTagApp object
         let ret = Self {
             all_stations: stations,
-            guessed_stations: Vec::new(),
+            guessed_stations: HashSet::new(),
             target_station: None,
             search_engine,
             station_input: String::new(),
@@ -96,6 +108,9 @@ impl Application for TubeTagApp {
             Message::GuessSubmitted => {
                 self.guess_submitted()
             }
+            Message::ClearGuesses => {
+                self.guessed_stations.clear()
+            }
             _ => { }
         }
         Command::none()
@@ -103,7 +118,7 @@ impl Application for TubeTagApp {
 
     fn view(&self) -> Element<Message> {
         // Construct map viewer
-        let map_path = convert_relative_path("assets/tube-map-8k.png");
+        let map_path = convert_relative_path("assets/tube-map-4k.png");
         let map_handle = image::Handle::from_path(map_path);
         let map_viewer = image::viewer(map_handle)
             .width(Length::Fill)
@@ -116,11 +131,15 @@ impl Application for TubeTagApp {
             .on_input(Message::GuessInputChanged)
             .on_submit(Message::GuessSubmitted);
 
+        let clear_guesses = button("Clear")
+            .on_press(Message::ClearGuesses);
+
         let overlaid = RenderOverlay::new(map_viewer, canvas(self));
 
         // === Layout ===
         let input_row = row![
-            guess_input
+            guess_input,
+            clear_guesses
         ].padding(5);
 
         let column_layout = Column::new()
@@ -139,26 +158,73 @@ impl Application for TubeTagApp {
 }
 
 impl TubeTagApp {
-    fn search_approx(&self, query : &str) -> Option<usize>{
+    fn search_approx(&self, query : &str) -> Vec<usize>{
         // Search with search engine
         let results: Vec<usize> = self.search_engine.search(query);
+        if results.is_empty() {
+            return results
+        }
 
-        // If distance is small, return found
-        return if (results.len() > 0) { Some(results[0]) } else { None }
+        let first_idx = results[0];
+        let first_station = &self.all_stations[first_idx];
+
+        if !first_station.name.contains("Edgware Road") {
+            return vec![first_idx]
+        }
+
+        // Edgware Roads is a special case since we have 2 Edgware Roads
+        let mut duplicates: Vec<usize> = vec![];
+        for (idx, station) in self.all_stations.iter().enumerate() {
+            if station.name.contains("Edgware Road") {
+                duplicates.push(idx);
+
+                if duplicates.len() == 2 {
+                    break
+                }
+            }
+        }
+        return duplicates
     }
 
     fn guess_submitted(&mut self) {
-        let station_idx = self.search_approx(&self.station_input);
+        let station_indices = self.search_approx(&self.station_input);
 
         // Input was not a valid station
-        if station_idx.is_none() {
+        if station_indices.is_empty() {
             // TODO: Some sort of user feedback for "Station doesn't exist"
             return;
         }
 
         // Station is valid
-        self.guessed_stations.push(station_idx.unwrap());
+        for station_idx in station_indices {
+            self.guessed_stations.insert(station_idx);
+        }
         self.station_input = String::new();
+    }
+
+    fn find_collisions(self) {
+        // TODO: Remove this
+        let mut collisions: HashSet<usize> = HashSet::new();
+        for (idx, station) in self.all_stations.iter().enumerate() {
+            if collisions.contains(&idx) {
+                continue
+            }
+            let result = self.search_engine.search(&station.name);
+            if result.len() == 0 {
+                println!("--------------------");
+                println!("Uhhhh.... {:?}", station.name)
+            }
+            if result.len() > 1 {
+                println!("--------------------");
+                println!("More than 1 for {:?}:", station.name);
+                for result in result {
+                    println!("{:?}", self.all_stations[result].name);
+                    collisions.insert(result);
+                }
+            }
+        }
+        println!("--------------------");
+        println!("{:?} collisions", collisions.len());
     }
 }
 
