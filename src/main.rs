@@ -218,11 +218,21 @@ impl TubeTagApp {
         // Station is valid
         for station_idx in station_indices {
             self.guessed_stations.insert(station_idx);
+
+            if let Some(target_idx) = self.target_station {
+                if station_idx == target_idx {
+                    self.game_won()
+                }
+            }
         }
         self.station_input = String::new();
     }
 
-    fn find_collisions(self) {
+    fn game_won(&self) {
+        println!("You won!")
+    }
+
+    fn find_collisions(&self) {
         // TODO: Remove this
         let mut collisions: HashSet<usize> = HashSet::new();
         for (idx, station) in self.all_stations.iter().enumerate() {
@@ -263,6 +273,24 @@ const UNDERGROUND_FONT: Font = Font {
     ..Font::DEFAULT
 };
 
+fn average_position(positions: &Vec<(f32, f32)>) -> (f32, f32) {
+    let mut x = 0.0;
+    let mut y = 0.0;
+    for position in positions {
+        x += position.0;
+        y += position.1;
+    }
+    (x / positions.len() as f32, y / positions.len() as f32)
+}
+
+fn lerp_colour(start: &Color, end: &Color, delta: f32) -> Color {
+    Color::from_rgb(
+        start.r * (1.0 - delta) + end.r * delta,
+        start.g * (1.0 - delta) + end.g * delta,
+        start.b * (1.0 - delta) + end.b * delta
+    )
+}
+
 impl Program<Message> for TubeTagApp {
     type State = viewer::State;
 
@@ -301,10 +329,32 @@ impl Program<Message> for TubeTagApp {
                         coords.y_dist_percent(relative_y - 0.5)
                     ).add(offset);
 
-                    let circle = Path::circle(point, coords.x_dist_pixels(32.0));
+                    if let Some(target_idx) = self.target_station {
+                        let target_station = &self.all_stations[target_idx];
+                        let average_target_position = average_position(&target_station.station_positions);
+                        let dx = offsets.0 - average_target_position.0;
+                        let dy = offsets.1 - average_target_position.1;
 
-                    // TODO: Determine colour based on distance
-                    // frame.fill(&circle, Color::from_rgb8(0, 255, 0));
+                        let distance = (dx * dx + dy * dy).sqrt() * CoordinateSystem::REL_Y;
+
+                        let red = Color::from_rgb8(255, 0, 0);
+                        let yellow = Color::from_rgb8(255, 255, 0);
+                        let green = Color::from_rgb8(0, 255, 0);
+
+                        let colour = if distance > 0.7 {
+                            red
+                        } else if distance > 0.2 {
+                            lerp_colour(&yellow, &red, (distance * 2.0) - 0.4)
+                        } else {
+                            lerp_colour(&green, &yellow, distance * 5.0)
+                        };
+
+
+                        let circle = Path::circle(point, coords.x_dist_pixels(32.0));
+                        frame.fill(&circle, Color::BLACK);
+                        let circle = Path::circle(point, coords.x_dist_pixels(25.0));
+                        frame.fill(&circle, colour);
+                    }
 
                     // Render station name text
                     if index == 0 {
