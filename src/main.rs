@@ -6,7 +6,7 @@ mod resource_util;
 use std::collections::HashSet;
 use std::fs;
 use std::fs::File;
-use std::ops::{Add};
+use std::ops::{Add, Deref};
 use iced::{Color, executor, Font, font, Point, Rectangle, Renderer, Vector};
 use iced::widget::{container, row, image, text_input, Column, canvas, button};
 use iced::{Application, Command, Element, Length, Settings, Theme};
@@ -17,6 +17,8 @@ use iced::widget::image::viewer;
 use json_comments::StripComments;
 use simsearch::{SearchOptions, SimSearch};
 use regex::Regex;
+use rand::{random, Rng};
+use rand::seq::SliceRandom;
 use crate::render_overlay::RenderOverlay;
 use crate::stations::Station;
 use crate::coordinate_system::CoordinateSystem;
@@ -33,7 +35,7 @@ struct TubeTagApp {
     // Backend
     all_stations: Vec<Station>,
     guessed_stations: HashSet<usize>,
-    target_station: Option<Station>,
+    target_station: Option<usize>,
     search_engine: SimSearch<usize>,
 
     // Frontend
@@ -46,7 +48,8 @@ enum Message {
     FontLoaded(Result<(), font::Error>),
     GuessInputChanged(String),
     GuessSubmitted,
-    ClearGuesses
+    Restart,
+    ShowAll
 }
 
 impl Application for TubeTagApp {
@@ -83,7 +86,7 @@ impl Application for TubeTagApp {
         let load_font_command = font::load(fs::read(font_filepath).unwrap()).map(Message::FontLoaded);
 
         // Construct a TubeTagApp object
-        let ret = Self {
+        let mut ret = Self {
             all_stations: stations,
             guessed_stations: HashSet::new(),
             target_station: None,
@@ -91,6 +94,7 @@ impl Application for TubeTagApp {
             station_input: String::new(),
             render_cache: Cache::new()
         };
+        ret.restart_game();
 
         // Return the constructed object and the command
         (ret, load_font_command)
@@ -108,8 +112,13 @@ impl Application for TubeTagApp {
             Message::GuessSubmitted => {
                 self.guess_submitted()
             }
-            Message::ClearGuesses => {
-                self.guessed_stations.clear()
+            Message::Restart => {
+                self.restart_game()
+            }
+            Message::ShowAll => {
+                for idx in 0..self.all_stations.len() {
+                    self.guessed_stations.insert(idx);
+                }
             }
             _ => { }
         }
@@ -118,7 +127,7 @@ impl Application for TubeTagApp {
 
     fn view(&self) -> Element<Message> {
         // Construct map viewer
-        let map_path = convert_relative_path("assets/tube-map-4k.png");
+        let map_path = convert_relative_path("assets/tube-map-8k.png");
         let map_handle = image::Handle::from_path(map_path);
         let map_viewer = image::viewer(map_handle)
             .width(Length::Fill)
@@ -131,16 +140,19 @@ impl Application for TubeTagApp {
             .on_input(Message::GuessInputChanged)
             .on_submit(Message::GuessSubmitted);
 
-        let clear_guesses = button("Clear")
-            .on_press(Message::ClearGuesses);
+        let clear_guesses = button("Restart")
+            .on_press(Message::Restart);
+        let show_all = button("Show All")
+            .on_press(Message::ShowAll);
 
         let overlaid = RenderOverlay::new(map_viewer, canvas(self));
 
         // === Layout ===
         let input_row = row![
             guess_input,
-            clear_guesses
-        ].padding(5);
+            clear_guesses,
+            show_all
+        ].padding(5).spacing(5);
 
         let column_layout = Column::new()
             .push(input_row)
@@ -158,6 +170,14 @@ impl Application for TubeTagApp {
 }
 
 impl TubeTagApp {
+    fn restart_game(&mut self) {
+        self.guessed_stations.clear();
+
+        let mut rng = rand::thread_rng();
+        let random_idx = rng.gen_range(0..self.all_stations.len());
+        self.target_station = Some(random_idx)
+    }
+
     fn search_approx(&self, query : &str) -> Vec<usize>{
         // Search with search engine
         let results: Vec<usize> = self.search_engine.search(query);
@@ -287,8 +307,7 @@ impl Program<Message> for TubeTagApp {
                     // frame.fill(&circle, Color::from_rgb8(0, 255, 0));
 
                     // Render station name text
-                    if index == 0
-                    {
+                    if index == 0 {
                         // Loop over each line in the name and render it
                         for name in station.get_render_lines(&point, &coords) {
                             frame.fill_text(name)
