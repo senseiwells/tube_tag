@@ -218,7 +218,8 @@ impl TubeTagApp {
 
         let mut rng = rand::thread_rng();
         let random_idx = rng.gen_range(0..self.all_stations.len());
-        self.target_station = Some(random_idx)
+        self.target_station = Some(random_idx);
+        self.title = None;
     }
 
     fn search_approx(&self, query : &str) -> Vec<usize>{
@@ -283,6 +284,10 @@ impl TubeTagApp {
             Some(Color::from_rgba8(255, 255, 255, 0.5)),
             Duration::from_secs(15)
         ));
+
+        for idx in 0..self.all_stations.len() {
+            self.guessed_stations.insert(idx);
+        }
     }
 }
 
