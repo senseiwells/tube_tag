@@ -41,6 +41,8 @@ struct TubeTagApp {
     // Frontend
     station_input: String,
     render_cache: Cache,
+
+    viewing_map: bool
 }
 
 #[derive(Debug, Clone)]
@@ -49,7 +51,8 @@ enum Message {
     GuessInputChanged(String),
     GuessSubmitted,
     Restart,
-    ShowAll
+    GiveUp,
+    ShowMap
 }
 
 impl Application for TubeTagApp {
@@ -92,7 +95,8 @@ impl Application for TubeTagApp {
             target_station: None,
             search_engine,
             station_input: String::new(),
-            render_cache: Cache::new()
+            render_cache: Cache::new(),
+            viewing_map: false
         };
         ret.restart_game();
 
@@ -115,10 +119,13 @@ impl Application for TubeTagApp {
             Message::Restart => {
                 self.restart_game()
             }
-            Message::ShowAll => {
+            Message::GiveUp => {
                 for idx in 0..self.all_stations.len() {
                     self.guessed_stations.insert(idx);
                 }
+            }
+            Message::ShowMap => {
+                self.viewing_map = !self.viewing_map
             }
             _ => { }
         }
@@ -142,8 +149,10 @@ impl Application for TubeTagApp {
 
         let clear_guesses = button("Restart")
             .on_press(Message::Restart);
-        let show_all = button("Show All")
-            .on_press(Message::ShowAll);
+        let give_up = button("Give Up")
+            .on_press(Message::GiveUp);
+        let show_map = button(if self.viewing_map { "Hide Map" } else { "Show Map" })
+            .on_press(Message::ShowMap);
 
         let overlaid = RenderOverlay::new(map_viewer, canvas(self));
 
@@ -151,7 +160,8 @@ impl Application for TubeTagApp {
         let input_row = row![
             guess_input,
             clear_guesses,
-            show_all
+            give_up,
+            show_map
         ].padding(5).spacing(5);
 
         let column_layout = Column::new()
@@ -231,31 +241,6 @@ impl TubeTagApp {
     fn game_won(&self) {
         println!("You won!")
     }
-
-    fn find_collisions(&self) {
-        // TODO: Remove this
-        let mut collisions: HashSet<usize> = HashSet::new();
-        for (idx, station) in self.all_stations.iter().enumerate() {
-            if collisions.contains(&idx) {
-                continue
-            }
-            let result = self.search_engine.search(&station.name);
-            if result.len() == 0 {
-                println!("--------------------");
-                println!("Uhhhh.... {:?}", station.name)
-            }
-            if result.len() > 1 {
-                println!("--------------------");
-                println!("More than 1 for {:?}:", station.name);
-                for result in result {
-                    println!("{:?}", self.all_stations[result].name);
-                    collisions.insert(result);
-                }
-            }
-        }
-        println!("--------------------");
-        println!("{:?} collisions", collisions.len());
-    }
 }
 
 
@@ -305,8 +290,6 @@ impl Program<Message> for TubeTagApp {
         // Clone the state and cast to PubState to extract offsets
         let exposed_state: PubState = unsafe { std::mem::transmute(state.clone()) };
 
-        // TODO: We should only clear this if the state has changed
-        //   since the last time we drew on our canvas
         self.render_cache.clear();
 
         // Rendering
@@ -319,8 +302,20 @@ impl Program<Message> for TubeTagApp {
 
             let coords = CoordinateSystem::new(frame.width(), frame.height(), exposed_state.scale);
 
-            for station_idx in &self.guessed_stations {
-                let station = &self.all_stations[station_idx.clone()];
+            let stations = if !self.viewing_map {
+                let mut guessed = vec![];
+                for station in &self.guessed_stations {
+                    guessed.push(&self.all_stations[station.clone()])
+                }
+                guessed
+            } else {
+                let mut all = vec![];
+                for station in &self.all_stations {
+                    all.push(station)
+                }
+                all
+            };
+            for station in stations {
                 for (index, offsets) in station.station_positions.iter().enumerate() {
                     let relative_x = offsets.0 * CoordinateSystem::REL_X;
                     let relative_y = offsets.1 * CoordinateSystem::REL_Y;
@@ -328,6 +323,31 @@ impl Program<Message> for TubeTagApp {
                         coords.x_dist_percent(relative_x - 0.5),
                         coords.y_dist_percent(relative_y - 0.5)
                     ).add(offset);
+
+                    // Render station name text
+                    if index == 0 {
+                        // Loop over each line in the name and render it
+                        for mut name in station.get_render_lines(&point, &coords) {
+                            if let Some(target_idx) = self.target_station {
+                                let target_station = &self.all_stations[target_idx];
+                                if !self.viewing_map && station.name == target_station.name {
+                                    name.color = Color::from_rgb8(0, 255, 0);
+                                    let mut shadow = name.clone();
+                                    shadow.color = Color::BLACK;
+                                    shadow.position = shadow.position.add(Vector::new(
+                                        coords.x_dist_pixels(2.0),
+                                        coords.y_dist_pixels(2.0)
+                                    ));
+                                    frame.fill_text(shadow)
+                                }
+                            }
+                            frame.fill_text(name)
+                        }
+                    }
+
+                    if self.viewing_map {
+                        continue
+                    }
 
                     if let Some(target_idx) = self.target_station {
                         let target_station = &self.all_stations[target_idx];
@@ -354,14 +374,6 @@ impl Program<Message> for TubeTagApp {
                         frame.fill(&circle, Color::BLACK);
                         let circle = Path::circle(point, coords.x_dist_pixels(25.0));
                         frame.fill(&circle, colour);
-                    }
-
-                    // Render station name text
-                    if index == 0 {
-                        // Loop over each line in the name and render it
-                        for name in station.get_render_lines(&point, &coords) {
-                            frame.fill_text(name)
-                        }
                     }
                 }
             }
