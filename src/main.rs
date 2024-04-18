@@ -7,12 +7,14 @@ use std::collections::HashSet;
 use std::fs;
 use std::fs::File;
 use std::ops::{Add, Deref};
-use iced::{Color, executor, Font, font, Point, Rectangle, Renderer, Vector};
+use std::time::{Duration, Instant};
+use iced::{Color, executor, Font, font, Pixels, Point, Rectangle, Renderer, Size, Vector};
 use iced::widget::{container, row, image, text_input, Column, canvas, button};
 use iced::{Application, Command, Element, Length, Settings, Theme};
+use iced::alignment::{Horizontal, Vertical};
 use iced::font::{Family, Weight};
 use iced::mouse::Cursor;
-use iced::widget::canvas::{Cache, Geometry, Path, Program};
+use iced::widget::canvas::{Cache, Geometry, Path, Program, Text};
 use iced::widget::image::viewer;
 use json_comments::StripComments;
 use simsearch::{SearchOptions, SimSearch};
@@ -30,6 +32,35 @@ pub fn main() -> iced::Result {
     TubeTagApp::run(settings)
 }
 
+struct Title {
+    message: Text,
+    overlay: Option<Color>,
+    duration: Duration,
+    instant: Instant
+}
+
+impl Title {
+    fn new(
+        message: &str,
+        color: Color,
+        overlay: Option<Color>,
+        duration: Duration
+    ) -> Self {
+        return Self {
+            message: Text {
+                content: message.to_string(),
+                color,
+                size: Pixels(60.0),
+                font: UNDERGROUND_FONT,
+                ..Default::default()
+            },
+            overlay,
+            duration,
+            instant: Instant::now(),
+        }
+    }
+}
+
 #[derive(Default)]
 struct TubeTagApp {
     // Backend
@@ -41,6 +72,7 @@ struct TubeTagApp {
     // Frontend
     station_input: String,
     render_cache: Cache,
+    title: Option<Title>,
 
     viewing_map: bool
 }
@@ -96,6 +128,7 @@ impl Application for TubeTagApp {
             search_engine,
             station_input: String::new(),
             render_cache: Cache::new(),
+            title: None,
             viewing_map: false
         };
         ret.restart_game();
@@ -221,7 +254,12 @@ impl TubeTagApp {
 
         // Input was not a valid station
         if station_indices.is_empty() {
-            // TODO: Some sort of user feedback for "Station doesn't exist"
+            self.title = Some(Title::new(
+                "Unknown Station",
+                Color::from_rgb8(200, 0,0),
+                None,
+                Duration::from_secs(2)
+            ));
             return;
         }
 
@@ -238,8 +276,13 @@ impl TubeTagApp {
         self.station_input = String::new();
     }
 
-    fn game_won(&self) {
-        println!("You won!")
+    fn game_won(&mut self) {
+        self.title = Some(Title::new(
+            "You Won!",
+            Color::from_rgb8(0, 255,0),
+            Some(Color::from_rgba8(255, 255, 255, 0.5)),
+            Duration::from_secs(15)
+        ));
     }
 }
 
@@ -376,6 +419,33 @@ impl Program<Message> for TubeTagApp {
                         frame.fill(&circle, colour);
                     }
                 }
+            }
+
+            // Title rendering
+            if let Some(title) = &self.title {
+                let since = Instant::now().duration_since(title.instant);
+                if since > title.duration {
+                    return
+                }
+
+                if let Some(overlay) = title.overlay {
+                    frame.fill_rectangle(
+                        Point::new(0.0, 0.0),
+                        Size::new(frame.width(), frame.height()),
+                        overlay
+                    )
+                }
+
+                let mut message = title.message.clone();
+                message.position = center;
+                message.horizontal_alignment = Horizontal::Center;
+                message.vertical_alignment = Vertical::Center;
+                let mut shadow = message.clone();
+                shadow.color = Color::BLACK;
+                shadow.position = shadow.position.add(Vector::new(4.0, 4.0));
+
+                frame.fill_text(shadow);
+                frame.fill_text(message)
             }
         });
 
