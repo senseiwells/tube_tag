@@ -9,7 +9,7 @@ use std::fs::File;
 use std::ops::{Add, Deref};
 use std::time::{Duration, Instant};
 use iced::{Color, executor, Font, font, Pixels, Point, Rectangle, Renderer, Size, Vector};
-use iced::widget::{container, row, image, text_input, Column, canvas, button};
+use iced::widget::{container, row, image, text_input, Column, canvas, button, text};
 use iced::{Application, Command, Element, Length, Settings, Theme};
 use iced::alignment::{Horizontal, Vertical};
 use iced::font::{Family, Weight};
@@ -68,6 +68,8 @@ struct TubeTagApp {
     guessed_stations: HashSet<usize>,
     target_station: Option<usize>,
     search_engine: SimSearch<usize>,
+    num_guesses: usize,
+    guess_num_text: String,
 
     // Frontend
     station_input: String,
@@ -126,6 +128,8 @@ impl Application for TubeTagApp {
             guessed_stations: HashSet::new(),
             target_station: None,
             search_engine,
+            num_guesses: 0,
+            guess_num_text: "Guesses: 0".to_string(),
             station_input: String::new(),
             render_cache: Cache::new(),
             title: None,
@@ -186,12 +190,14 @@ impl Application for TubeTagApp {
             .on_press(Message::GiveUp);
         let show_map = button(if self.viewing_map { "Hide Map" } else { "Show Map" })
             .on_press(Message::ShowMap);
+        let guesses_text = text(&self.guess_num_text).size(16);
 
         let overlaid = RenderOverlay::new(map_viewer, canvas(self));
 
         // === Layout ===
         let input_row = row![
             guess_input,
+            guesses_text,
             clear_guesses,
             give_up,
             show_map
@@ -216,6 +222,11 @@ impl TubeTagApp {
     fn restart_game(&mut self) {
         self.guessed_stations.clear();
 
+        // Reset num guesses
+        self.num_guesses = 0;
+        self.guess_num_text = "Guesses: 0".to_string();
+
+        // Pick random target station
         let mut rng = rand::thread_rng();
         let random_idx = rng.gen_range(0..self.all_stations.len());
         self.target_station = Some(random_idx);
@@ -264,7 +275,11 @@ impl TubeTagApp {
             return;
         }
 
-        // Station is valid
+        // Station is valid, update guess count
+        self.num_guesses += 1;
+        self.guess_num_text = format!("Guesses: {}", self.num_guesses);
+
+        // Add stations to 'guessed_stations' and check for win
         for station_idx in station_indices {
             self.guessed_stations.insert(station_idx);
 
