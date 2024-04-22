@@ -138,7 +138,7 @@ impl Application for TubeTagApp {
             search_engine,
             num_guesses: 0,
             game_code: 0,
-            show_modal: true,
+            show_modal: false,
             station_input: String::new(),
             render_cache: Cache::new(),
             title: None,
