@@ -16,6 +16,8 @@ use iced::font::{Family, Weight};
 use iced::mouse::Cursor;
 use iced::widget::canvas::{Cache, Geometry, Path, Program, Text};
 use iced::widget::image::viewer;
+use iced_aw::modal;
+use iced_aw::native::Card;
 use json_comments::StripComments;
 use simsearch::{SearchOptions, SimSearch};
 use regex::Regex;
@@ -69,12 +71,14 @@ struct TubeTagApp {
     target_station: Option<usize>,
     search_engine: SimSearch<usize>,
     num_guesses: usize,
-    guess_num_text: String,
+    show_modal: bool,
+    game_code: usize,
 
     // Frontend
     station_input: String,
     render_cache: Cache,
     title: Option<Title>,
+    game_code_input: String,
 
     viewing_map: bool
 }
@@ -86,7 +90,11 @@ enum Message {
     GuessSubmitted,
     Restart,
     GiveUp,
-    ShowMap
+    ShowMap,
+    PlayAlong,
+    CloseModal,
+    GameCodeInputChanged(String),
+    GameCodeSubmitted
 }
 
 impl Application for TubeTagApp {
@@ -129,11 +137,13 @@ impl Application for TubeTagApp {
             target_station: None,
             search_engine,
             num_guesses: 0,
-            guess_num_text: "Guesses: 0".to_string(),
+            game_code: 0,
+            show_modal: true,
             station_input: String::new(),
             render_cache: Cache::new(),
             title: None,
-            viewing_map: false
+            viewing_map: false,
+            game_code_input: String::new()
         };
         ret.restart_game();
 
@@ -164,6 +174,30 @@ impl Application for TubeTagApp {
             Message::ShowMap => {
                 self.viewing_map = !self.viewing_map
             }
+            Message::PlayAlong => {
+                self.show_modal = true;
+            }
+            Message::CloseModal => {
+                self.show_modal = false;
+            }
+            Message::GameCodeInputChanged(input) => {
+                self.game_code_input = input
+            }
+            Message::GameCodeSubmitted => {
+                self.restart_game();
+
+                let new_code = self.game_code_input.parse::<usize>();
+                if (new_code.is_ok()) {
+                    self.game_code = new_code.unwrap();
+                    let new_target = (self.game_code ^ 0b0011010100101) % 1234;
+                    if (new_target < self.all_stations.len()) {
+                        self.target_station = Some(new_target);
+                    }
+                }
+
+                self.show_modal = false;
+            }
+
             _ => { }
         }
         Command::none()
@@ -184,13 +218,15 @@ impl Application for TubeTagApp {
             .on_input(Message::GuessInputChanged)
             .on_submit(Message::GuessSubmitted);
 
+        let guesses_text = text(format!("Guesses: {}", self.num_guesses)).size(16);
         let clear_guesses = button("Restart")
             .on_press(Message::Restart);
         let give_up = button("Give Up")
             .on_press(Message::GiveUp);
         let show_map = button(if self.viewing_map { "Hide Map" } else { "Show Map" })
             .on_press(Message::ShowMap);
-        let guesses_text = text(&self.guess_num_text).size(16);
+        let play_along = button("Play Along")
+            .on_press(Message::PlayAlong);
 
         let overlaid = RenderOverlay::new(map_viewer, canvas(self));
 
@@ -200,20 +236,43 @@ impl Application for TubeTagApp {
             guesses_text,
             clear_guesses,
             give_up,
-            show_map
+            show_map,
+            play_along
         ].padding(5).spacing(5);
 
         let column_layout = Column::new()
             .push(input_row)
             .push(overlaid);
 
-        container(
+        let main_container = container(
             column_layout,
         )
             .width(Length::Fill)
             .height(Length::Fill)
             .center_x()
-            .center_y()
+            .center_y();
+
+        // Construct modal
+        let modal_window = if self.show_modal {
+            Some(
+                Card::new(
+                    text(format!("Game code: {}", self.game_code)),
+                    text_input("Enter a code", &self.game_code_input)
+                        .on_input(Message::GameCodeInputChanged)
+                        .on_submit(Message::GameCodeSubmitted)
+                )
+                    .max_width(500.0)
+                    //.width(Length::Shrink)
+                    .on_close(Message::CloseModal),
+            )
+        } else {
+            None
+        };
+
+        modal(main_container, modal_window)
+            .backdrop(Message::CloseModal)
+            .on_esc(Message::CloseModal)
+            .align_y(Vertical::Center)
             .into()
     }
 }
@@ -224,13 +283,24 @@ impl TubeTagApp {
 
         // Reset num guesses
         self.num_guesses = 0;
-        self.guess_num_text = "Guesses: 0".to_string();
 
         // Pick random target station
         let mut rng = rand::thread_rng();
         let random_idx = rng.gen_range(0..self.all_stations.len());
         self.target_station = Some(random_idx);
         self.title = None;
+
+        // Update game code
+        self.update_game_code();
+    }
+
+    fn update_game_code(&mut self) {
+        if self.target_station.is_none() {
+            return;
+        }
+
+        let offset = (rand::random::<usize>() % 1000) * 1234;
+        self.game_code = (self.target_station.unwrap() + offset) ^ 0b0011010100101;
     }
 
     fn search_approx(&self, query : &str) -> Vec<usize>{
@@ -277,7 +347,6 @@ impl TubeTagApp {
 
         // Station is valid, update guess count
         self.num_guesses += 1;
-        self.guess_num_text = format!("Guesses: {}", self.num_guesses);
 
         // Add stations to 'guessed_stations' and check for win
         for station_idx in station_indices {
